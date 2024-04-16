@@ -28,10 +28,14 @@
 
 `git commit -m "mensagem do commit"`: Adiciona as mudanças no repositório local.
 
+> Os próximos dois comandos só precisam ser feitos uma vez na pasta usada para o repositório.
+
 `git branch -M main`: Diz qual será o "branch" que será editado.
 
 `git remote add origin https://github.com/username/repo.git`: Diz qual repositório no **Github** será modificado (para combinar com o repositório local).
 
+> Os seguintes comandos usam o repositório remoto (do Github).
+
 `git push -u origin main`: Publica o repositório para o Github.
 
-``
+`git pull origin main`: Atualiza o "branch" atual caso esteja atrasado em relação ao publicado no Github.
