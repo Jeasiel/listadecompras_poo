@@ -1,7 +1,7 @@
 package principal;
 
-public class App {
+public class Main {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        //Aqui estará a classe do menu principal com as funções
     }
 }
