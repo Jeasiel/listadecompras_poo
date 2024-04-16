@@ -32,7 +32,7 @@
 
 `git branch -M main`: Diz qual será o "branch" que será editado.
 
-`git remote add origin https://github.com/username/repo.git`: Diz qual repositório no **Github** será modificado (para combinar com o repositório local).
+`git remote add origin https://github.com/username/repo.git`: Diz qual repositório no **Github** será modificado (para combinar com o repositório local), que no nosso caso é `git remote add origin https://github.com/Jeasiel/listadecompras_poo.git`.
 
 > Os seguintes comandos usam o repositório remoto (do Github).
 
