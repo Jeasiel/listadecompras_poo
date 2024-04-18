@@ -44,7 +44,7 @@ public class Lista {
     public boolean removerProduto(String nome){
         boolean removido = false;
         for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome() == nome){
+            if(listaProdutos.get(i).getNome().equals(nome)){
                 listaProdutos.remove(i);
                 removido = true;
             }
@@ -55,7 +55,7 @@ public class Lista {
     public boolean atualizarProduto(String nome, double precoEstimado, int quantidade){
         boolean atualizado = false;
         for(int i = 0; i < listaProdutos.size(); i++){
-            if(nome == listaProdutos.get(i).getNome()){
+            if(listaProdutos.get(i).getNome().equals(nome)){
                 int quantidadeAnterior = listaProdutos.get(i).getQuantidade();
                 listaProdutos.get(i).atualizar(precoEstimado, quantidadeAnterior += quantidade);
             }
@@ -66,7 +66,7 @@ public class Lista {
     private boolean itemDuplicado(ArrayList<Produto> listaProdutos, String nome, double precoEstimado, int quantidade){
         boolean duplicata = false;
         for(int i = 0; i < listaProdutos.size(); i++){
-            if(nome == listaProdutos.get(i).getNome()){
+            if(listaProdutos.get(i).getNome().equals(nome)){
                 int quantidadeAnterior = listaProdutos.get(i).getQuantidade();
                 listaProdutos.get(i).atualizar(precoEstimado, quantidadeAnterior += quantidade);
                 duplicata = true;

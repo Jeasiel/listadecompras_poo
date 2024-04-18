@@ -27,4 +27,9 @@ public class Produto {
     public int getQuantidade() {
         return quantidade;
     }
+
+    @Override
+    public String toString(){
+        return "Nome do produto: " + nome + ". Preço estimado: R$" + precoEstimado + ". Quantidade desejada: " + quantidade + ".";
+    }
 }
