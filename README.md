@@ -40,7 +40,7 @@
 
 `git pull origin main`: Atualiza o "branch" atual caso esteja atrasado em relação ao publicado no Github.
 
-## Outras ferramentas que serão utilizadas
+## Outras ferramentas que poderão ser utilizadas
 **Maven**
 
 **Spring**
