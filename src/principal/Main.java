@@ -6,9 +6,14 @@ import listas.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        //Aqui estará a classe do menu principal com as funções
-        Lista lista = new Lista("Lista Exemplo", "Mercado");
         Scanner scanner = new Scanner(System.in);
+        //Aqui estará a classe do menu principal com as funções
+
+        //O menu abaixo funciona como um "Editar lista". Podem usar as opções desse menu e adaptá-las ao menu de lista
+        //Conterá: Criar lista, Editar lista, Deletar lista, Ver lista (pode-se fazer até um toString ou similar na classe de lista)
+        //Pode também ser bom uma opção "Editar informações da lista", para editar nome e tipo de lista
+        //Se precisarem editar alguma coisa nas classes me avisem, por favor
+        Lista lista = new Lista("Lista Exemplo", "Mercado");
         while (true) {
             System.out.println("Opções:\n1- Adicionar produto\n2- Remover produto\n3- Atualizar produto\n4- Ver lista\n0- Sair\n=======");
             int escolha = -1;
