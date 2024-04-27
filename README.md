@@ -12,6 +12,8 @@
 
 `bin`: Executáveis.
 
+> Qualquer coisa fora dessa estrutura (como o próprio README.md) não interfere diretamente no projeto, então não é necessário modificar
+
 ## Estrutura de Pacotes (packages)
 
 `principal`: Pacote com o que vai ser mostrado na tela (antes do front-end).
