@@ -5,8 +5,8 @@ import produtos.*;
 
 public class Lista { 
     private String nome;
-    private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
     private String tipo;
+    private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
     public Lista(){
         nome = "Lista";
@@ -27,13 +27,11 @@ public class Lista {
      * Função que adiciona um produto à lista
      * @param nome Nome do produto
      * @param precoEstimado Preço estimado do produto
-     * @param quantidade Quantidade de produtos
+     * @param quantidade Quantidade do produto
      */
     public void adicionarProduto(String nome, double precoEstimado, int quantidade){
-        if(!itemDuplicado(listaProdutos, nome, precoEstimado, quantidade)){
-            Produto produto = new Produto(nome, precoEstimado, quantidade);
-            listaProdutos.add(produto);
-        }
+        Produto produto = new Produto(nome, precoEstimado, quantidade);
+        listaProdutos.add(produto);
     }
 
     /**
@@ -52,27 +50,23 @@ public class Lista {
         return removido;
     }
 
+    public void removerProdutoNoIndice(int posicao){
+        listaProdutos.remove(posicao);
+    }
+
     public boolean atualizarProduto(String nome, double precoEstimado, int quantidade){
         boolean atualizado = false;
         for(int i = 0; i < listaProdutos.size(); i++){
             if(listaProdutos.get(i).getNome().equals(nome)){
-                int quantidadeAnterior = listaProdutos.get(i).getQuantidade();
-                listaProdutos.get(i).atualizar(precoEstimado, quantidadeAnterior += quantidade);
+                listaProdutos.get(i).atualizar(precoEstimado, quantidade);
+                atualizado = true;
             }
         }
         return atualizado;
     }
 
-    private boolean itemDuplicado(ArrayList<Produto> listaProdutos, String nome, double precoEstimado, int quantidade){
-        boolean duplicata = false;
-        for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome().equals(nome)){
-                int quantidadeAnterior = listaProdutos.get(i).getQuantidade();
-                listaProdutos.get(i).atualizar(precoEstimado, quantidadeAnterior += quantidade);
-                duplicata = true;
-            }
-        }
-        return duplicata;
+    public void atualizarProdutoNoIndice(int posicao, double precoEstimado, int quantidade){
+        listaProdutos.get(posicao).atualizar(precoEstimado, quantidade);
     }
 
     public String getNome() {
