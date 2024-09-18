@@ -1,23 +1,15 @@
 package br.edu.ufape.poo.listadecompras.dados;
-import java.util.ArrayList;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 
-public interface IRepositorioContas{
+@Repository
+public interface IRepositorioContas extends JpaRepository<Conta, Long>{
 	
-	public ArrayList<Conta> listaContas = new ArrayList<>();
-	
-	public void adicionarConta(Conta u);
-	
-	public void removerConta(Conta u);
-	
-	public void atualizarConta(Conta u);
-	
-	public int consultarConta(Conta u);
-
-	public ArrayList<Conta> getListaContas();
-
-	public void setListaContas(ArrayList<Conta> listaContas);
-
+	public List<Conta> findByEmail(String email);
 
 }

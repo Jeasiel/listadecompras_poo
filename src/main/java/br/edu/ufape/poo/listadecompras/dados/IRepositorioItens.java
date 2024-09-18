@@ -2,20 +2,14 @@ package br.edu.ufape.poo.listadecompras.dados;
 
 import java.util.ArrayList;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Produto;
 
-public interface IRepositorioItens { //ver se realmente ten utilidade
+@Repository
+public interface IRepositorioItens extends JpaRepository<Produto, Long> { //ver se realmente ten utilidade
 	
-	public ArrayList<Produto> listaProdutos = new ArrayList<>();
-	
-	public void adicionarProduto(String nome, double precoEstimado, int quantidade);
-	
-	public boolean removerProduto(String nome);
-	
-	public void removerProdutoNoIndice(int posicao);
-	
-	public boolean atualizarProduto(String nome, double precoEstimado, int quantidade);
-	
-	public void atualizarProdutoNoIndice(int posicao, double precoEstimado, int quantidade);
+	public ArrayList<Produto> findByName(String nome);
 	
 }

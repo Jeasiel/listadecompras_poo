@@ -12,8 +12,6 @@ public abstract class Conta{
         this.senha = senha;
     }
 
-    public abstract void fazerLogin(String email, String senha);
-    public abstract void atualizarCadastro(String email, String senha);
 
     public String getNome() {
         return nome;

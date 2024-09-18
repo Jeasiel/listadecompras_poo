@@ -2,23 +2,14 @@ package br.edu.ufape.poo.listadecompras.dados;
 
 import java.util.ArrayList;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 
-public interface IRepositorioListas { 
+@Repository
+public interface IRepositorioListas extends JpaRepository<Lista, Long>{ 
 	
-	public ArrayList<Lista> arrayListas = new ArrayList<>();
-	
-	public void adicionarLista(Lista l);
-	
-	public void removerLista(Lista l);
-	
-	public void atualizarLista(Lista l);
-	
-	public int consultarLista(Lista l);
-
-	public ArrayList<Lista> getListas();
-
-	public void setListas(ArrayList<Lista> arrayLista);
-
+	public ArrayList<Lista> findByName(String name);
 
 }

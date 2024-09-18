@@ -13,15 +13,6 @@ public class Usuario extends Conta{
         //provalvemente puxar do banco de dados e dar um setListas
     }
 
-    @Override
-    public void fazerLogin(String email, String senha) { // talvez seja melhor serem metodos do repositorio ou de uma classe de comunicação?
-    	//fazer método
-    }
-
-    @Override
-    public void atualizarCadastro(String email, String senha) { // talvez seja melhor serem metodos do repositorio ou de uma classe de comunicação?
-    	//fazer método
-    }
 
     public void criarLista(){
         //ver como se aplicaria para os varios construtores de listas

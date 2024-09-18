@@ -3,12 +3,10 @@ package br.edu.ufape.poo.listadecompras.negocios.entidade;
 import java.util.ArrayList;
 //import listas.Lista;
 
-import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
-
 public class Administrador extends Conta{
 	
 	private final ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-	private IRepositorioContas iRepositorioContas;
+	
 	//ter outro para administradores?
     
     public Administrador(String nome, String email, String senha) {
@@ -16,21 +14,6 @@ public class Administrador extends Conta{
         //provavelmente ler do banco e dar um set aqui
     }
 
-    @Override //Conta logada na classe NegocioConta, caso necessário, mudar para uma classe de comunicação
-    public void fazerLogin(String email, String senha) {
-        for(int i = 0; i < iRepositorioContas.getListaContas().size(); i++){
-			if(iRepositorioContas.getListaContas().get(i).getEmail().equals(email)){
-				if(iRepositorioContas.getListaContas().get(i).getSenha().equals(senha)){
-					//parei aqui (vou ver melhor como fazer essa parte)
-				}
-			}
-		}
-	}
-
-    @Override
-    public void atualizarCadastro(String email, String senha) { // talvez seja melhor serem metodos do repositorio ou de uma classe de comunicação?
-        
-    }
     
     public void gerenciarContas(){
         //controler?
