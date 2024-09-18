@@ -1,9 +1,9 @@
-package br.edu.ufape.poo.listadecompras.negocios.basica;
+package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
 import java.util.ArrayList;
 
 
-public class Usuario extends ContaAbstrata{
+public class Usuario extends Conta{
 	
 	private ArrayList<Lista> arrayListas = new ArrayList<>();
 	//ver como aplicar o conceito de listas globais
@@ -30,7 +30,6 @@ public class Usuario extends ContaAbstrata{
     public void editarLista(Lista l){
         //fazer método
     }
-
 	
 	public void adicionarLista(Lista l) {
 		//Em construção
@@ -39,10 +38,9 @@ public class Usuario extends ContaAbstrata{
 		arrayListas.add(l);
 	}
 
-	
 	public void removerLista(Lista l) {
 		//Em construção
-		
+
 		if(consultarLista(l) == -1) {
 			//throwException
 		}
@@ -51,7 +49,6 @@ public class Usuario extends ContaAbstrata{
 		}
 		
 	}
-
 	
 	public void atualizarLista(Lista l) {
 		//Em construção
@@ -65,7 +62,6 @@ public class Usuario extends ContaAbstrata{
 		}
 		
 	}
-
 	
 	public int consultarLista(Lista l) {	
 		//Em construção
@@ -80,14 +76,12 @@ public class Usuario extends ContaAbstrata{
 		
 		
 	}
-
 	
 	public ArrayList<Lista> getListas() {
 		//Em construção
 		
 		return arrayListas;
 	}
-
 	
 	public void setListas(ArrayList<Lista> arrayLista) {
 		//Em construção

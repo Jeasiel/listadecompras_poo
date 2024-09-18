@@ -6,17 +6,11 @@
 
 ## Estrutura Geral
 
-`src`: Pasta contendo o código (separada em pastas que são os package).
-
-`lib`: Pasta contendo as bibliotecas usadas.
-
-`bin`: Executáveis.
-
-> Qualquer coisa fora dessa estrutura (como o próprio README.md) não interfere diretamente no projeto, então não é necessário modificar
+`src`: Pasta contendo o código (separada em pastas que são os packages).
 
 ## Estrutura de Pacotes (packages)
 
-`principal`: Pacote com o que vai ser mostrado na tela (antes do front-end).
+Fazer
 
 ## Comandos Rápidos do Git
 
@@ -42,7 +36,8 @@
 
 `git pull origin main`: Atualiza o "branch" atual caso esteja atrasado em relação ao publicado no Github.
 
-## Outras ferramentas que poderão ser utilizadas
+## Ferramentas que serão utilizadas
 **Maven**
-
 **Spring**
+**Lombok**
+**H2**

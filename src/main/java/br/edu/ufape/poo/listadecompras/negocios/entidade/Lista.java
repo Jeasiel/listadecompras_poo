@@ -1,4 +1,4 @@
-package br.edu.ufape.poo.listadecompras.negocios.basica;
+package br.edu.ufape.poo.listadecompras.negocios.entidade;
 import java.util.ArrayList;
 
 public class Lista { 

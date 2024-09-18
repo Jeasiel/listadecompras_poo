@@ -1,10 +1,8 @@
-package br.edu.ufape.poo.listadecompras.negocios.cadastro;
+package br.edu.ufape.poo.listadecompras.dados;
 
 import java.util.ArrayList;
 
-import br.edu.ufape.poo.listadecompras.negocios.basica.Lista;
-
-
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 
 public interface IRepositorioListas { 
 	

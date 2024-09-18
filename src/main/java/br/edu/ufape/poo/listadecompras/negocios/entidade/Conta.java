@@ -1,12 +1,12 @@
-package br.edu.ufape.poo.listadecompras.negocios.basica;
+package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
-public abstract class ContaAbstrata{
+public abstract class Conta{
     
     private String nome;
     private String email;
     private String senha;
 
-    public ContaAbstrata(String nome, String email, String senha){
+    public Conta(String nome, String email, String senha){
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -14,7 +14,6 @@ public abstract class ContaAbstrata{
 
     public abstract void fazerLogin(String email, String senha);
     public abstract void atualizarCadastro(String email, String senha);
-
 
     public String getNome() {
         return nome;
@@ -39,6 +38,5 @@ public abstract class ContaAbstrata{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
  
 }

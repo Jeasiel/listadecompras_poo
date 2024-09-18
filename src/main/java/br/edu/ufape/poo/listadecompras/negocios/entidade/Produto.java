@@ -1,4 +1,4 @@
-package br.edu.ufape.poo.listadecompras.negocios.basica;
+package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
 public class Produto {
     private String nome;
