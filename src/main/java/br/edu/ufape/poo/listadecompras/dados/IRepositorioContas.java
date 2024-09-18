@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 
-public interface IRepositorioContas {
+public interface IRepositorioContas{
 	
 	public ArrayList<Conta> listaContas = new ArrayList<>();
 	

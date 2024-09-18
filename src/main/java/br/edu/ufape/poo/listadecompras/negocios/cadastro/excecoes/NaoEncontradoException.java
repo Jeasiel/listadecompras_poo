@@ -1,4 +1,4 @@
-package br.edu.ufape.poo.listadecompras.negocios.excecoes;
+package br.edu.ufape.poo.listadecompras.negocios.cadastro.excecoes;
 
 public class NaoEncontradoException extends Exception {
 
