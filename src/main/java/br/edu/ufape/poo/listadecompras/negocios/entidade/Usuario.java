@@ -2,7 +2,6 @@ package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
 import java.util.ArrayList;
 
-
 public class Usuario extends Conta{
 	
 	private ArrayList<Lista> arrayListas = new ArrayList<>();
@@ -12,7 +11,6 @@ public class Usuario extends Conta{
         super(nome, email, senha);
         //provalvemente puxar do banco de dados e dar um setListas
     }
-
 
     public void criarLista(){
         //ver como se aplicaria para os varios construtores de listas

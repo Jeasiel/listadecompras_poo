@@ -12,6 +12,17 @@ public abstract class Conta{
         this.senha = senha;
     }
 
+    public void editarConta(String nome, String email, String senha){
+        if(nome != null){
+            this.nome = nome;
+        }
+        if(email != null){
+            this.email = email;
+        }
+        if(senha != null){
+            this.senha = senha;
+        }
+    }
 
     public String getNome() {
         return nome;

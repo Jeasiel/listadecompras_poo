@@ -13,7 +13,6 @@ public class Administrador extends Conta{
         super(nome, email, senha);
         //provavelmente ler do banco e dar um set aqui
     }
-
     
     public void gerenciarContas(){
         //controler?
@@ -39,12 +38,7 @@ public class Administrador extends Conta{
 		}		
 	}
 	
-	public void editarConta(Usuario u) {
-		//fazer método
-	}
-
-
-	public void atualizarConta(Usuario u) {
+	public void atualizarConta(Usuario u, String novoNome, String novoEmail, String novaSenha) {
 		//Em construção
 		
 		if(consultarConta(u) == -1) {
@@ -52,19 +46,17 @@ public class Administrador extends Conta{
 		}
 		else {
 			Usuario e = listaUsuarios.get(consultarConta(u)); //retorna o index da lista correta
-			editarConta(e);
+			e.editarConta(novoNome, novoEmail, novaSenha);
 		}	
 	}
 
 	public int consultarConta(Usuario u) {
 		//Em construção
-		
 		int index = listaUsuarios.indexOf(u);
-				
+
 		if(index >= 0) {
 			return index;
 		}
-				
 		return -1;	
 	}
 
