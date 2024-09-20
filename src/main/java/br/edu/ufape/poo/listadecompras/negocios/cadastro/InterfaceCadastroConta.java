@@ -9,7 +9,7 @@ public interface InterfaceCadastroConta {
 
     List<Conta> procurarContaEmail(String email);
 
-    Conta salvarConta(Conta entity);
+    void salvarConta(Conta entity);
 
 	List<Conta> listarContas();
 

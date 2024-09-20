@@ -3,13 +3,14 @@ package br.edu.ufape.poo.listadecompras.negocios.cadastro;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 
 public interface InterfaceCadastroLista {
     
-    List<Lista> procurarListaEmail(String email);
+    List<Lista> procurarListaConta(Conta conta);
 
-    Lista salvarLista(Lista entity);
+    void salvarLista(Lista entity);
 
 	List<Lista> listarListas();
 

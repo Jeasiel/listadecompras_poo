@@ -1,10 +1,12 @@
 package br.edu.ufape.poo.listadecompras.negocios.entidade;
 import java.util.ArrayList;
 
-public class Lista { 
+public class Lista {
+    
     private String nome;
     private String tipo;
     private ArrayList<Produto> listaProdutos = new ArrayList<>();
+    private boolean modelo;
 
     public Lista(){
         nome = "Lista";
@@ -20,6 +22,8 @@ public class Lista {
         this.nome = nome;
         this.tipo = tipo;
     }
+
+    //passar parte para a fachada
     
     /**
      * Função que adiciona um produto à lista
@@ -78,6 +82,10 @@ public class Lista {
     public String getTipo() {
         return tipo;
     }
+    
+    public boolean isModelo(){
+        return this.modelo;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -89,5 +97,9 @@ public class Lista {
 
     public void setListaProdutos(ArrayList<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
+    }
+
+    public void setModelo(boolean modelo){
+        this.modelo = modelo;
     }
 }

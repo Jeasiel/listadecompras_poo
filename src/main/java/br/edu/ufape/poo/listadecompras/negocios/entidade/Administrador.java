@@ -3,9 +3,8 @@ package br.edu.ufape.poo.listadecompras.negocios.entidade;
 import java.util.ArrayList;
 //import listas.Lista;
 
-public class Administrador extends Conta{
-	
-	private final ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+public class Administrador extends Conta {
+	private final ArrayList<Conta> listaContas = new ArrayList<>();
 	
 	//ter outro para administradores?
     
@@ -22,37 +21,37 @@ public class Administrador extends Conta{
         //ver como funcionaria
     }
 	
-	public void adicionarConta(Usuario u) {
+	public void adicionarConta(Conta u) {
 		//em construção
-		listaUsuarios.add(u);
+		listaContas.add(u);
 	}
 
-	public void removerConta(Usuario u) {
+	public void removerConta(Conta u) {
 		//Em construção
 		
 		if(consultarConta(u) == -1) {
 			//throwException
 		}
 		else {
-			listaUsuarios.remove(consultarConta(u)); //remove com base no index dado;
+			listaContas.remove(consultarConta(u)); //remove com base no index dado;
 		}		
 	}
 	
-	public void atualizarConta(Usuario u, String novoNome, String novoEmail, String novaSenha) {
+	public void atualizarConta(Conta u, String novoNome, String novoEmail, String novaSenha) {
 		//Em construção
 		
 		if(consultarConta(u) == -1) {
 			//throwException
 		}
 		else {
-			Usuario e = listaUsuarios.get(consultarConta(u)); //retorna o index da lista correta
+			Conta e = listaContas.get(consultarConta(u)); //retorna o index da lista correta
 			e.editarConta(novoNome, novoEmail, novaSenha);
 		}	
 	}
 
-	public int consultarConta(Usuario u) {
+	public int consultarConta(Conta u) {
 		//Em construção
-		int index = listaUsuarios.indexOf(u);
+		int index = listaContas.indexOf(u);
 
 		if(index >= 0) {
 			return index;
@@ -60,16 +59,16 @@ public class Administrador extends Conta{
 		return -1;	
 	}
 
-	public ArrayList<Usuario> getListaUsuarios() {
+	public ArrayList<Conta> getListaContas() {
 		//Em construção
 		
-		return listaUsuarios;
+		return listaContas;
 	}
 
-	public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+	public void setListaContas(ArrayList<Conta> listaContas) {
 		//Em construção
 		
-		this.listaUsuarios.clear();
-		this.listaUsuarios.addAll(listaUsuarios);
+		this.listaContas.clear();
+		this.listaContas.addAll(listaContas);
 	}
 }

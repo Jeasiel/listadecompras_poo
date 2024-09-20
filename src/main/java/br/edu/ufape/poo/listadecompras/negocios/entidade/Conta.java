@@ -2,6 +2,7 @@ package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
 public abstract class Conta{
     
+    private long id;
     private String nome;
     private String email;
     private String senha;
@@ -47,5 +48,12 @@ public abstract class Conta{
     public void setSenha(String senha) {
         this.senha = senha;
     }
- 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
