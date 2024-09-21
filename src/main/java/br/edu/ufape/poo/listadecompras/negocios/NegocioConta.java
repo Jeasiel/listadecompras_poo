@@ -3,6 +3,9 @@ package br.edu.ufape.poo.listadecompras.negocios;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
@@ -12,9 +15,10 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 
+@Service
 public class NegocioConta implements InterfaceCadastroConta{
 
-    //Fazer as exceções
+    @Autowired
     private IRepositorioContas repositorioContas;
     
 

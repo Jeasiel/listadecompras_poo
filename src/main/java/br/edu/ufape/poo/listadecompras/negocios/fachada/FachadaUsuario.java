@@ -2,6 +2,9 @@ package br.edu.ufape.poo.listadecompras.negocios.fachada;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroProduto;
@@ -18,10 +21,16 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoExc
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
 
+@Service
 public class FachadaUsuario {
 
+    @Autowired
     private InterfaceCadastroConta cadastroConta;
+
+    @Autowired
     private InterfaceCadastroLista cadastroLista;
+    
+    @Autowired
     private InterfaceCadastroProduto cadastroProduto;
 
     private Usuario usuarioLogado;
@@ -41,9 +50,12 @@ public class FachadaUsuario {
         }
     }
 
-    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException{
-        cadastroLista.localizarListaId(l.getId()).get().setNome(nome);
-        cadastroLista.localizarListaId(l.getId()).get().setTipo(tipo);
+    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+        Lista inner = cadastroLista.localizarListaId(l.getId()).get();
+        inner.setNome(nome);
+        inner.setTipo(tipo);
+        cadastroLista.removerLista(l.getId());
+        cadastroLista.salvarLista(inner);
     }
 
 	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
@@ -59,7 +71,7 @@ public class FachadaUsuario {
         cadastroProduto.salvarProduto(new Produto(nome, precoEstimado, quantidade, lista));
     }
 
-    public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException{
+    public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
         if(nome != null){
             p.setNome(nome);
@@ -67,6 +79,8 @@ public class FachadaUsuario {
         if(quantidade != 0){
             p.setQuantidade(quantidade);
         }
+        cadastroProduto.removerProduto(p.getId());
+        cadastroProduto.salvarProduto(p);
     }
 
     public List<Produto> getProdutos(Lista l) throws ListaNaoEncontradaException{
@@ -83,7 +97,7 @@ public class FachadaUsuario {
         cadastroConta.salvarConta(new Usuario(nome, email, senha));
     }
 
-    public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException{
+    public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
         if(nome != null){
             usuarioLogado.setNome(nome);
         }
@@ -98,6 +112,8 @@ public class FachadaUsuario {
             u.setNome(nome);
             u.setEmail(email);
             u.setSenha(senha);
+            cadastroConta.removerConta(u.getId());
+            cadastroConta.salvarConta(u);
         }
     }
 

@@ -3,6 +3,9 @@ package br.edu.ufape.poo.listadecompras.negocios;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioProduto;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroProduto;
@@ -15,10 +18,12 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoExc
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
 
+@Service
 public class NegocioProduto implements InterfaceCadastroProduto{
 
-    //Fazer as capturas e exceções
+    @Autowired
     private IRepositorioProduto repositorioProduto;
+    @Autowired
     private IRepositorioListas repositorioListas;
 
     public List<Produto> procurarProdutoLista(Lista lista)

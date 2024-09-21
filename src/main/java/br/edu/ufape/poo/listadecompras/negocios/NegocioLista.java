@@ -3,6 +3,9 @@ package br.edu.ufape.poo.listadecompras.negocios;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
@@ -12,10 +15,12 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaExcep
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 
+@Service
 public class NegocioLista implements InterfaceCadastroLista{
 
-    //Fazer tratamentos
+    @Autowired
     private IRepositorioListas repositorioListas;
+    @Autowired
     private IRepositorioContas repositorioContas;
 
     public List<Lista> procurarListaConta(Conta conta)
