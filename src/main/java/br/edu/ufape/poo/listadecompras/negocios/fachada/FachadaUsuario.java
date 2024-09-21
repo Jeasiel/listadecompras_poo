@@ -100,6 +100,10 @@ public class FachadaUsuario {
             u.setSenha(senha);
         }
     }
+
+    public Usuario verConta(){
+        return usuarioLogado;
+    }
     
     public void deletarConta() throws ContaNaoEncontradaException{
         cadastroConta.removerConta(usuarioLogado);
