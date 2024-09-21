@@ -6,7 +6,9 @@ import java.util.Optional;
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 
@@ -19,7 +21,7 @@ public class NegocioConta implements InterfaceCadastroConta{
     public List<Conta> procurarContaEmail(String email) 
     throws NaoEncontradoPeloEmailException{
         
-        if(repositorioContas.findByEmail(email) == null || repositorioContas.findByEmail(email).isEmpty()){
+        if(repositorioContas.findByEmail(email) == null){
             throw  new NaoEncontradoPeloEmailException(email);
         }
        
@@ -27,10 +29,28 @@ public class NegocioConta implements InterfaceCadastroConta{
     }
 
     public void salvarConta(Conta entity)
-    throws ContaNaoEncontradaException{
-        if(repositorioContas.findById(entity.getId()) == null){
-            throw new ContaNaoEncontradaException(entity);
+    throws ContaDuplicadaException, EmailInvalidoExeception{
+
+        if(!entity.getEmail().contains("@")){
+			throw new EmailInvalidoExeception(entity.getEmail());
+		}
+		else if(!entity.getEmail().contains(".com")){
+			throw new EmailInvalidoExeception(entity.getEmail());
+		}
+		else if(!entity.getEmail().contains("gmail") && 
+        !entity.getEmail().contains("hotmail") && 
+        !entity.getEmail().contains("outlook") && !entity.getEmail().contains("yahoo"))
+        {
+			throw new EmailInvalidoExeception(entity.getEmail());
+		}
+		else if(entity.getEmail().indexOf('@') < 3){
+			throw new EmailInvalidoExeception(entity.getEmail());
+		}
+
+        if(repositorioContas.findByEmail(entity.getEmail()) != null){
+            throw new ContaDuplicadaException();
         }
+
         repositorioContas.save(entity);
     }
 
@@ -38,9 +58,9 @@ public class NegocioConta implements InterfaceCadastroConta{
         return repositorioContas.findAll();
     }
 
-	public void removerConta(Long id)
+	public void removerConta(long id)
     throws NaoEncontradoPeloIdException{
-        if(repositorioContas.findById(id) == null){
+        if(!localizarIdConta(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
         repositorioContas.deleteById(id);
@@ -51,14 +71,19 @@ public class NegocioConta implements InterfaceCadastroConta{
         if(repositorioContas.findById(entity.getId()) == null){
             throw new ContaNaoEncontradaException(entity);
         }
+        
         repositorioContas.delete(entity);
     }
 
 	public Optional<Conta> localizarContaId(long id)
     throws NaoEncontradoPeloIdException{
-        if(repositorioContas.findById(id) == null){
+        if(!localizarIdConta(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
         return repositorioContas.findById(id);
+    }
+
+    public boolean localizarIdConta(long id){
+        return repositorioContas.findById(id) != null;
     }
 }

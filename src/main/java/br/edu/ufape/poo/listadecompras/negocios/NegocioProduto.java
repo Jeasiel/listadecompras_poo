@@ -10,7 +10,10 @@ import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Produto;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NomeInvalidoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
 
 public class NegocioProduto implements InterfaceCadastroProduto{
 
@@ -29,7 +32,20 @@ public class NegocioProduto implements InterfaceCadastroProduto{
     }
 
     public void salvarProduto(Produto entity)
-    throws ProdutoNaoEncontradoException{
+    throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
+
+        if(entity.getNome().length() == 1){
+			throw new NomeInvalidoException();
+		}
+
+        if(entity.getQuantidade() <= 0){
+            throw new QuantidadeInvalidaException();
+        }
+
+        if(entity.getPrecoEstimado() <= 0){
+            throw new ValorInvalidoException();
+        }
+
         if(repositorioProduto.findById(entity.getId()) == null){
             throw new ProdutoNaoEncontradoException(entity);
         }
@@ -40,10 +56,10 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         return repositorioProduto.findAll();
     }
 
-	public void removerProduto(Long id)
+	public void removerProduto(long id)
     throws NaoEncontradoPeloIdException{
 
-        if(repositorioProduto.findById(id) == null){
+        if(!localizarIdProduto(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
         repositorioProduto.deleteById(id);
@@ -63,10 +79,14 @@ public class NegocioProduto implements InterfaceCadastroProduto{
 	public Optional<Produto> localizarProdutoId(long id)
     throws NaoEncontradoPeloIdException{
 
-        if(repositorioProduto.findById(id) == null){
+        if(!localizarIdProduto(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
         
         return repositorioProduto.findById(id);
+    }
+
+    public boolean localizarIdProduto(long id){
+        return repositorioProduto.findById(id) != null;
     }
 }

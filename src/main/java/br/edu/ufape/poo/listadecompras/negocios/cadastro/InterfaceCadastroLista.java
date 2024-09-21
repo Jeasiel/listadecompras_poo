@@ -17,7 +17,7 @@ public interface InterfaceCadastroLista {
 
 	List<Lista> listarListas();
 
-	void removerLista(Long id) throws NaoEncontradoPeloIdException;
+	void removerLista(long id) throws NaoEncontradoPeloIdException;
 
 	void removerLista(Lista entity) throws ListaNaoEncontradaException;
 

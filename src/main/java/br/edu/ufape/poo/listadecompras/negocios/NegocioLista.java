@@ -41,10 +41,10 @@ public class NegocioLista implements InterfaceCadastroLista{
         return repositorioListas.findAll();
     }
 
-	public void removerLista(Long id)
+	public void removerLista(long id)
     throws NaoEncontradoPeloIdException{
 
-        if(repositorioListas.findById(id) == null){
+        if(!localizarIdLista(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
 
@@ -62,10 +62,14 @@ public class NegocioLista implements InterfaceCadastroLista{
 	public Optional<Lista> localizarListaId(long id)
     throws NaoEncontradoPeloIdException{
 
-        if(repositorioListas.findById(id) == null){
+        if(!localizarIdLista(id)){
             throw new NaoEncontradoPeloIdException(id);
         }
         
         return repositorioListas.findById(id);
+    }
+
+    public boolean localizarIdLista(long id){
+        return repositorioListas.findById(id) != null;
     }
 }
