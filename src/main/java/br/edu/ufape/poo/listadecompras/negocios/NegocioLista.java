@@ -3,21 +3,37 @@ package br.edu.ufape.poo.listadecompras.negocios;
 import java.util.List;
 import java.util.Optional;
 
+import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 
 public class NegocioLista implements InterfaceCadastroLista{
 
     //Fazer tratamentos
     private IRepositorioListas repositorioListas;
+    private IRepositorioContas repositorioContas;
 
-    public List<Lista> procurarListaConta(Conta conta){
+    public List<Lista> procurarListaConta(Conta conta)
+    throws ContaNaoEncontradaException{
+
+        if(repositorioContas.findById(conta.getId()) == null){
+            throw new ContaNaoEncontradaException(conta);
+        }
+
         return repositorioListas.findByConta(conta);
     }
 
-    public void salvarLista(Lista entity){
+    public void salvarLista(Lista entity)
+    throws ListaNaoEncontradaException{
+
+        if(repositorioListas.findById(entity.getId()) == null){
+            throw new ListaNaoEncontradaException(entity);
+        }
         repositorioListas.save(entity);
     }
 
@@ -25,15 +41,31 @@ public class NegocioLista implements InterfaceCadastroLista{
         return repositorioListas.findAll();
     }
 
-	public void removerLista(Long id){
+	public void removerLista(Long id)
+    throws NaoEncontradoPeloIdException{
+
+        if(repositorioListas.findById(id) == null){
+            throw new NaoEncontradoPeloIdException(id);
+        }
+
         repositorioListas.deleteById(id);
     }
 
-	public void removerLista(Lista entity){
+	public void removerLista(Lista entity)
+    throws ListaNaoEncontradaException{
+        if(repositorioListas.findById(entity.getId()) == null){
+            throw new ListaNaoEncontradaException(entity);
+        }
         repositorioListas.delete(entity);
     }
 
-	public Optional<Lista> localizarListaId(long id){
+	public Optional<Lista> localizarListaId(long id)
+    throws NaoEncontradoPeloIdException{
+
+        if(repositorioListas.findById(id) == null){
+            throw new NaoEncontradoPeloIdException(id);
+        }
+        
         return repositorioListas.findById(id);
     }
 }
