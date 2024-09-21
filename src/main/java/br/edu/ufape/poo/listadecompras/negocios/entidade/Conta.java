@@ -1,6 +1,6 @@
 package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,7 +23,7 @@ public abstract class Conta{
     private String senha;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Lista> listas;
+    private List<Lista> listas;
 
     public Conta(String nome, String email, String senha){
         this.nome = nome;

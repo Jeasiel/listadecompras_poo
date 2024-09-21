@@ -1,148 +1,109 @@
 package br.edu.ufape.poo.listadecompras.negocios.fachada;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
+import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
+import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroProduto;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Produto;
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NomeInvalidoException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
 
 public class FachadaUsuario {
-    private ArrayList<Lista> arrayListas = new ArrayList<>();
-	//ver como aplicar o conceito de listas globais
 
-    public void criarLista(){
-        //ver como se aplicaria para os varios construtores de listas
-    }
+    private InterfaceCadastroConta cadastroConta;
+    private InterfaceCadastroLista cadastroLista;
+    private InterfaceCadastroProduto cadastroProduto;
 
-    public void editarLista(Lista l){
-        //fazer método
-    }
-	
-	public void adicionarLista(Lista l) {
-		//Em construção
-		
-		
-		arrayListas.add(l);
-	}
+    private Usuario usuarioLogado;
 
-	public void removerLista(Lista l) {
-		//Em construção
-
-		if(consultarLista(l) == -1) {
-			//throwException
-		}
-		else {
-			arrayListas.remove(consultarLista(l)); //remove com base no index dado;
-		}
-		
-	}
-	
-	public void atualizarLista(Lista l) {
-		//Em construção
-		
-		if(consultarLista(l) == -1) {
-			//throwException
-		}
-		else {
-			Lista e = arrayListas.get(consultarLista(l)); //retorna o index da lista correta
-			editarLista(e);
-		}
-		
-	}
-	
-	public int consultarLista(Lista l) {	
-		//Em construção
-		
-		int index = arrayListas.indexOf(l);
-		
-		if(index >= 0) {
-			return index;
-		}
-		
-		return -1;
-		
-		
-	}
-	
-	public ArrayList<Lista> getListas() {
-		//Em construção
-		
-		return arrayListas;
-	}
-	
-	public void setListas(ArrayList<Lista> arrayLista) {
-		//Em construção
-		
-		this.arrayListas.clear();
-		this.arrayListas.addAll(arrayLista);
-	}
-
-    public ArrayList<Lista> getArrayListas() {
-        return arrayListas;
-    }
-
-    public void setArrayListas(ArrayList<Lista> arrayListas) {
-        this.arrayListas = arrayListas;
-    }
-    
-	//passar parte para a fachada -------------------- Dividir
-    
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
-    /**
-     * Função que adiciona um produto à lista
-     * @param nome Nome do produto
-     * @param precoEstimado Preço estimado do produto
-     * @param quantidade Quantidade do produto
-     */
-    public void adicionarProduto(String nome, double precoEstimado, int quantidade){
-        Produto produto = new Produto(nome, precoEstimado, quantidade);
-        listaProdutos.add(produto);
-    }
-
-    /**
-     * Função que remove todos os produtos da lista com o respectivo nome
-     * @param nome Nome do produto
-     * @return Retorna {@code true} se remover um objeto da lista
-     */
-    public boolean removerProduto(String nome){
-        boolean removido = false;
-        for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome().equals(nome)){
-                listaProdutos.remove(i);
-                removido = true;
-            }
+    //Mexe com lista
+    public void criarLista(String nome, String tipo) throws ListaNaoEncontradaException{
+        boolean criado = false;
+        if(nome != null && tipo != null){
+            criado = true;
+            cadastroLista.salvarLista(new Lista(nome, tipo, usuarioLogado));
+        } else if(nome != null){
+            criado = true;
+            cadastroLista.salvarLista(new Lista(nome, usuarioLogado));
         }
-        return removido;
-    }
-
-    public void removerProdutoNoIndice(int posicao){
-        listaProdutos.remove(posicao);
-    }
-
-    public boolean atualizarProduto(String nome, double precoEstimado, int quantidade){
-        boolean atualizado = false;
-        for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome().equals(nome)){
-                //listaProdutos.get(i).atualizar(precoEstimado, quantidade);
-                atualizado = true;
-            }
+        if(!criado){
+            cadastroLista.salvarLista(new Lista(usuarioLogado));
         }
-        return atualizado;
     }
 
-    public void atualizarProdutoNoIndice(int posicao, double precoEstimado, int quantidade){
-        //listaProdutos.get(posicao).atualizar(precoEstimado, quantidade);
+    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException{
+        cadastroLista.localizarListaId(l.getId()).get().setNome(nome);
+        cadastroLista.localizarListaId(l.getId()).get().setTipo(tipo);
     }
 
-	//Vai para negócio
-    public void editarConta(String nome, String email, String senha){
+	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+        cadastroLista.removerLista(l);
+	}
+	
+	public List<Lista> getListas() throws ListaNaoEncontradaException, ContaNaoEncontradaException{
+		return cadastroLista.procurarListaConta(usuarioLogado);
+	}
+    
+    //Mexe com produto
+    public void adicionarProduto(String nome, double precoEstimado, int quantidade, Lista lista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
+        cadastroProduto.salvarProduto(new Produto(nome, precoEstimado, quantidade, lista));
+    }
+
+    public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException{
+        Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
         if(nome != null){
-            //this.nome = nome;
+            p.setNome(nome);
+        }
+        if(quantidade != 0){
+            p.setQuantidade(quantidade);
+        }
+    }
+
+    public List<Produto> getProdutos(Lista l) throws ListaNaoEncontradaException{
+        return cadastroProduto.procurarProdutoLista(l);
+    }
+
+    public void removerProduto(Produto produto) throws ProdutoNaoEncontradoException{
+        cadastroProduto.removerProduto(produto);
+    }
+
+    //Mexe com conta
+
+    public void criarConta(String nome, String email, String senha) throws ContaNaoEncontradaException, ContaDuplicadaException, EmailInvalidoExeception{
+        cadastroConta.salvarConta(new Usuario(nome, email, senha));
+    }
+
+    public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException{
+        if(nome != null){
+            usuarioLogado.setNome(nome);
         }
         if(email != null){
-            //this.email = email;
+            usuarioLogado.setEmail(email);
         }
         if(senha != null){
-            //this.senha = senha;
+            usuarioLogado.setSenha(senha);
+        }
+        if(!(nome != null && email != null && senha != null)){
+            Usuario u = (Usuario) cadastroConta.localizarContaId(usuarioLogado.getId()).get();
+            u.setNome(nome);
+            u.setEmail(email);
+            u.setSenha(senha);
         }
     }
+    
+    public void deletarConta() throws ContaNaoEncontradaException{
+        cadastroConta.removerConta(usuarioLogado);
+    }
+
+    //Talvez seja necessário passar parte para a classe de negócio
 }

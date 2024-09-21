@@ -21,10 +21,15 @@ public class Produto {
     @JoinColumn(name = "idLista")
     private Lista lista;
 
-    public Produto(String nome, double precoEstimado, int quantidade){
+    public Produto(String nome, double precoEstimado, int quantidade, Lista lista){
         this.nome = nome;
         this.precoEstimado = precoEstimado;
         this.quantidade = quantidade;
+        this.lista = lista;
+    }
+
+    public Lista getLista() {
+        return lista;
     }
 
     public String getNome() {
@@ -57,5 +62,9 @@ public class Produto {
     
     public void setId(long id) {
         this.id = id;
+    }
+    
+    public void setLista(Lista lista) {
+        this.lista = lista;
     }
 }

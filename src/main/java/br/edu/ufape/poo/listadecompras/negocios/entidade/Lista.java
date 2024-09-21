@@ -1,5 +1,5 @@
 package br.edu.ufape.poo.listadecompras.negocios.entidade;
-import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,32 +21,35 @@ public class Lista {
     private boolean modelo;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
+    private List<Produto> listaProdutos;
 
     @OneToOne
     @JoinColumn(name = "conta")
     private Conta conta;
 
-    public Lista(){
+    public Lista(Conta conta){
         nome = "Lista";
         tipo = "Indefinido";
+        this.conta = conta;
     }
 
-    public Lista(String nome){
+    public Lista(String nome, Conta conta){
         this.nome = nome;
         tipo = "Indefinido";
+        this.conta = conta;
     }
 
-    public Lista(String nome, String tipo){
+    public Lista(String nome, String tipo, Conta conta){
         this.nome = nome;
         this.tipo = tipo;
+        this.conta = conta;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public ArrayList<Produto> getListaProdutos() {
+    public List<Produto> getListaProdutos() {
         return listaProdutos;
     }
 
@@ -66,7 +69,7 @@ public class Lista {
         this.tipo = tipo;
     }
 
-    public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+    public void setListaProdutos(List<Produto> listaProdutos) {
         this.listaProdutos = listaProdutos;
     }
 
