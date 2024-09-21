@@ -6,28 +6,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import br.edu.ufape.poo.listadecompras.negocios.NegocioConta;
+import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
-import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException;
-import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 
 @SpringBootTest
 public class NegocioContaTest {
 
     @Autowired
-    private NegocioConta negocioConta;
+    private IRepositorioContas repositorioContas;
 
 
     @Test
-    public void salvarConta(Conta entity)
-    throws ContaDuplicadaException, EmailInvalidoExeception{
+    void salvarContaTeste(){
 
-        long qtdContas = negocioConta.quantidadeContas();
+        long qtdContas = repositorioContas.count();
         Conta c = new Usuario("Aline", "aliinanda@gmail.com", "12345");
-
-        negocioConta.salvarConta(c);
-        long qtdContas2 = negocioConta.quantidadeContas();
+   
+        repositorioContas.save(c);
+        long qtdContas2 = repositorioContas.count();
 
         assertEquals(qtdContas + 1, qtdContas2);
     } 
