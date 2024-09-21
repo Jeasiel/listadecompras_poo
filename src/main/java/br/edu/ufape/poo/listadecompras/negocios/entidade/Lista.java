@@ -1,12 +1,31 @@
 package br.edu.ufape.poo.listadecompras.negocios.entidade;
 import java.util.ArrayList;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Lista {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String nome;
     private String tipo;
-    private ArrayList<Produto> listaProdutos = new ArrayList<>();
     private boolean modelo;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private ArrayList<Produto> listaProdutos = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "conta")
+    private Conta conta;
 
     public Lista(){
         nome = "Lista";
@@ -21,54 +40,6 @@ public class Lista {
     public Lista(String nome, String tipo){
         this.nome = nome;
         this.tipo = tipo;
-    }
-
-    //passar parte para a fachada
-    
-    /**
-     * Função que adiciona um produto à lista
-     * @param nome Nome do produto
-     * @param precoEstimado Preço estimado do produto
-     * @param quantidade Quantidade do produto
-     */
-    public void adicionarProduto(String nome, double precoEstimado, int quantidade){
-        Produto produto = new Produto(nome, precoEstimado, quantidade);
-        listaProdutos.add(produto);
-    }
-
-    /**
-     * Função que remove todos os produtos da lista com o respectivo nome
-     * @param nome Nome do produto
-     * @return Retorna {@code true} se remover um objeto da lista
-     */
-    public boolean removerProduto(String nome){
-        boolean removido = false;
-        for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome().equals(nome)){
-                listaProdutos.remove(i);
-                removido = true;
-            }
-        }
-        return removido;
-    }
-
-    public void removerProdutoNoIndice(int posicao){
-        listaProdutos.remove(posicao);
-    }
-
-    public boolean atualizarProduto(String nome, double precoEstimado, int quantidade){
-        boolean atualizado = false;
-        for(int i = 0; i < listaProdutos.size(); i++){
-            if(listaProdutos.get(i).getNome().equals(nome)){
-                listaProdutos.get(i).atualizar(precoEstimado, quantidade);
-                atualizado = true;
-            }
-        }
-        return atualizado;
-    }
-
-    public void atualizarProdutoNoIndice(int posicao, double precoEstimado, int quantidade){
-        listaProdutos.get(posicao).atualizar(precoEstimado, quantidade);
     }
 
     public String getNome() {
@@ -101,5 +72,13 @@ public class Lista {
 
     public void setModelo(boolean modelo){
         this.modelo = modelo;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

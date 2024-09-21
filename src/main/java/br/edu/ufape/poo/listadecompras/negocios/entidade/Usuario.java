@@ -1,90 +1,11 @@
 package br.edu.ufape.poo.listadecompras.negocios.entidade;
 
-import java.util.ArrayList;
+import jakarta.persistence.Entity;
 
+@Entity
 public class Usuario extends Conta{
 	
-	private ArrayList<Lista> arrayListas = new ArrayList<>();
-	//ver como aplicar o conceito de listas globais
-    
-    public Usuario(String nome, String email, String senha) {
+	public Usuario(String nome, String email, String senha) {
         super(nome, email, senha);
-        //provalvemente puxar do banco de dados e dar um setListas
     }
-
-    public void criarLista(){
-        //ver como se aplicaria para os varios construtores de listas
-    }
-
-    public void editarLista(Lista l){
-        //fazer método
-    }
-	
-	public void adicionarLista(Lista l) {
-		//Em construção
-		
-		
-		arrayListas.add(l);
-	}
-
-	public void removerLista(Lista l) {
-		//Em construção
-
-		if(consultarLista(l) == -1) {
-			//throwException
-		}
-		else {
-			arrayListas.remove(consultarLista(l)); //remove com base no index dado;
-		}
-		
-	}
-	
-	public void atualizarLista(Lista l) {
-		//Em construção
-		
-		if(consultarLista(l) == -1) {
-			//throwException
-		}
-		else {
-			Lista e = arrayListas.get(consultarLista(l)); //retorna o index da lista correta
-			editarLista(e);
-		}
-		
-	}
-	
-	public int consultarLista(Lista l) {	
-		//Em construção
-		
-		int index = arrayListas.indexOf(l);
-		
-		if(index >= 0) {
-			return index;
-		}
-		
-		return -1;
-		
-		
-	}
-	
-	public ArrayList<Lista> getListas() {
-		//Em construção
-		
-		return arrayListas;
-	}
-	
-	public void setListas(ArrayList<Lista> arrayLista) {
-		//Em construção
-		
-		this.arrayListas.clear();
-		this.arrayListas.addAll(arrayLista);
-	}
-
-    public ArrayList<Lista> getArrayListas() {
-        return arrayListas;
-    }
-
-    public void setArrayListas(ArrayList<Lista> arrayListas) {
-        this.arrayListas = arrayListas;
-    }
-    
 }
