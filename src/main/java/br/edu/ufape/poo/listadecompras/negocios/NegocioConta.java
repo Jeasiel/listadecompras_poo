@@ -86,4 +86,8 @@ public class NegocioConta implements InterfaceCadastroConta{
     public boolean localizarIdConta(long id){
         return repositorioContas.findById(id) != null;
     }
+
+    public long quantidadeContas(){
+        return repositorioContas.count();
+    }
 }
