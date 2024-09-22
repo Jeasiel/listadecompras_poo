@@ -9,6 +9,7 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaExcep
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 
 public interface InterfaceCadastroConta {
 
@@ -24,5 +25,5 @@ public interface InterfaceCadastroConta {
 
 	Optional<Conta> localizarContaId(long id) throws NaoEncontradoPeloIdException;
 
-	Conta login(String email, String senha) throws NaoEncontradoPeloEmailException;
+	Conta login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException;
 }

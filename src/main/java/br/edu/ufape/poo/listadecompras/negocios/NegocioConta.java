@@ -14,6 +14,7 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaExcep
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 
 @Service
 public class NegocioConta implements InterfaceCadastroConta{
@@ -87,17 +88,16 @@ public class NegocioConta implements InterfaceCadastroConta{
         return repositorioContas.findById(id);
     }
 
-    public Conta login(String email, String senha) throws NaoEncontradoPeloEmailException{
+    public Conta login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
         if(procurarContaEmail(email).size() > 0){
             if(procurarContaEmail(email).get(0).getSenha() == senha){
                 return procurarContaEmail(email).get(0);
             } else {
-                //throw new SenhaErradaException();
+                throw new SenhaErradaException();
             }
         } else {
             throw new NaoEncontradoPeloEmailException(email);
         }
-        return null;
     }
 
     public boolean localizarIdConta(long id){
