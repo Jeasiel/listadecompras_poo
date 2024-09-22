@@ -27,7 +27,7 @@ public class NegocioLista implements InterfaceCadastroLista{
     public List<Lista> procurarListaConta(Conta conta)
     throws ContaNaoEncontradaException{
 
-        if(repositorioContas.findById(conta.getId()) == null){
+        if(repositorioContas.findById(conta.getId()).get() == null){
             throw new ContaNaoEncontradaException(conta);
         }
 

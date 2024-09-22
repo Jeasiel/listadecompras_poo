@@ -144,7 +144,7 @@ public class FachadaUsuario {
     }
 
     public void login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
-        usuarioLogado = (Usuario) cadastroConta.login(email, senha);
+        this.usuarioLogado = (Usuario) cadastroConta.login(email, senha);
     }
 
     public Usuario getUsuarioLogado() {
@@ -179,5 +179,9 @@ public class FachadaUsuario {
 
     public void setCadastroProduto(InterfaceCadastroProduto cadastroProduto) {
         this.cadastroProduto = cadastroProduto;
+    }
+
+    public void setUsuarioLogado(Usuario usuarioLogado) {
+        this.usuarioLogado = usuarioLogado;
     }
 }

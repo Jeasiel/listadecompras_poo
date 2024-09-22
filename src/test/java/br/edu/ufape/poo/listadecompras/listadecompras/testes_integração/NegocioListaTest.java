@@ -12,7 +12,6 @@ import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.negocios.NegocioConta;
 import br.edu.ufape.poo.listadecompras.negocios.NegocioLista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
-import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
@@ -32,6 +31,7 @@ public class NegocioListaTest {
     private FachadaUsuario fachada;
     private NegocioConta negocioConta;
     private NegocioLista negocioLista;
+    
 
     @Test
     void salvarListaTeste() throws ListaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException{
@@ -44,8 +44,8 @@ public class NegocioListaTest {
     } 
 
     @Test
-    void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException{
-        
+    void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException{
+
         long qtdLista = repositorioListas.count();
         fachada.removerLista(fachada.getListas().get(0));
         long qtdLista2 = repositorioListas.count();
@@ -65,17 +65,18 @@ public class NegocioListaTest {
         repositorioContas.save(b);
         repositorioContas.save(c);
         repositorioContas.save(d);
-        Lista a1 = new Lista("note", "Mercado", c);
-        repositorioListas.save(a1);
+
+        fachada = new FachadaUsuario();
+        negocioLista = new NegocioLista();
+        negocioConta = new NegocioConta();
+        negocioConta.setRepositorioContas(repositorioContas);
+        fachada.setCadastroConta(negocioConta);
+        negocioLista.setRepositorioListas(repositorioListas);
+        negocioLista.setRepositorioContas(repositorioContas);
+        fachada.setCadastroLista(negocioLista);
+        fachada.login("aliinanda@gmail.com", "12345");
+        fachada.criarLista("funfa", "pf");
 
         
-        fachada = new FachadaUsuario();
-        negocioConta = new NegocioConta();
-        negocioLista = new NegocioLista();
-        negocioConta.setRepositorioContas(repositorioContas);
-        negocioLista.setRepositorioListas(repositorioListas);
-        fachada.setCadastroConta(negocioConta);
-        fachada.setCadastroLista(negocioLista);
-
     } 
 }
