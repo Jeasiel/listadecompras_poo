@@ -41,10 +41,10 @@ public class FachadaUsuario {
     //Mexe com lista
     public void criarLista(String nome, String tipo) throws ListaNaoEncontradaException{
         boolean criado = false;
-        if(nome != "" && tipo != ""){
+        if(!"".equals(nome) && !"".equals(tipo)){
             criado = true;
             cadastroLista.salvarLista(new Lista(nome, tipo, usuarioLogado));
-        } else if(nome != ""){
+        } else if(!"".equals(nome)){
             criado = true;
             cadastroLista.salvarLista(new Lista(nome, usuarioLogado));
         }
@@ -59,10 +59,10 @@ public class FachadaUsuario {
 
     public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
-        if(nome != ""){
+        if(!"".equals(nome)){
             inner.setNome(nome);
         }
-        if(tipo != ""){
+        if(!"".equals(tipo)){
             inner.setTipo(tipo);
         }
         cadastroLista.removerLista(l.getId());
@@ -88,7 +88,7 @@ public class FachadaUsuario {
 
     public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
-        if(nome != ""){
+        if(!"".equals(nome)){
             p.setNome(nome);
         }
         if(quantidade != 0){
@@ -117,16 +117,16 @@ public class FachadaUsuario {
     }
 
     public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
-        if(nome != ""){
+        if(!"".equals(nome)){
             usuarioLogado.setNome(nome);
         }
-        if(email != ""){
+        if(!"".equals(email)){
             usuarioLogado.setEmail(email);
         }
-        if(senha != ""){
+        if(!"".equals(senha)){
             usuarioLogado.setSenha(senha);
         }
-        if(!(nome != "" && email != "" && senha != "")){
+        if(!(!"".equals(nome) && !"".equals(email) && !"".equals(senha))){
             Usuario u = (Usuario) cadastroConta.localizarContaId(usuarioLogado.getId()).get();
             u.setNome(nome);
             u.setEmail(email);
@@ -156,5 +156,29 @@ public class FachadaUsuario {
 
     public List<Conta> getUsuarios(){
         return cadastroConta.listarContas();
+    }
+
+    public InterfaceCadastroConta getCadastroConta() {
+        return cadastroConta;
+    }
+
+    public void setCadastroConta(InterfaceCadastroConta cadastroConta) {
+        this.cadastroConta = cadastroConta;
+    }
+
+    public InterfaceCadastroLista getCadastroLista() {
+        return cadastroLista;
+    }
+
+    public void setCadastroLista(InterfaceCadastroLista cadastroLista) {
+        this.cadastroLista = cadastroLista;
+    }
+
+    public InterfaceCadastroProduto getCadastroProduto() {
+        return cadastroProduto;
+    }
+
+    public void setCadastroProduto(InterfaceCadastroProduto cadastroProduto) {
+        this.cadastroProduto = cadastroProduto;
     }
 }
