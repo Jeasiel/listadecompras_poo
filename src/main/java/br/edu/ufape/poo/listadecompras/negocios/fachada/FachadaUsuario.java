@@ -21,6 +21,7 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdExce
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NomeInvalidoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
 
 @Service
@@ -131,7 +132,7 @@ public class FachadaUsuario {
         cadastroConta.removerConta(usuarioLogado);
     }
 
-    public void login(String email, String senha) throws NaoEncontradoPeloEmailException{
+    public void login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
         usuarioLogado = (Usuario) cadastroConta.login(email, senha);
     }
 

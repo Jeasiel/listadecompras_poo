@@ -3,6 +3,9 @@ package br.edu.ufape.poo.listadecompras.comunicacao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +16,8 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @CrossOrigin
@@ -39,7 +39,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/usuario/login")
-    public void login(@RequestParam String email, @RequestParam String senha) throws NaoEncontradoPeloEmailException {
+    public void login(@RequestParam String email, @RequestParam String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException {
         fachadaUsuario.login(email, senha);
     }
     
