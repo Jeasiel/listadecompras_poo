@@ -8,12 +8,8 @@ public class Usuario extends Conta{
     public Usuario(){
         super();
     }
-    
+
 	public Usuario(String nome, String email, String senha) {
         super(nome, email, senha);
-    }
-
-    public Usuario() {
-        super();
     }
 }
