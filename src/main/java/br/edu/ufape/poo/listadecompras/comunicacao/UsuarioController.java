@@ -39,6 +39,7 @@ public class UsuarioController {
     public FachadaUsuario fachadaUsuario;
 
     // Usuario/Conta
+
     @GetMapping("/usuario")
     public List<Conta> listarUsuario() {
         return fachadaUsuario.getUsuarios();

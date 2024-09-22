@@ -91,6 +91,9 @@ public class FachadaUsuario {
         if(!"".equals(nome)){
             p.setNome(nome);
         }
+        if(precoEstimado != 0){
+            p.setPrecoEstimado(precoEstimado);
+        }
         if(quantidade != 0){
             p.setQuantidade(quantidade);
         }
