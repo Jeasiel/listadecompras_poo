@@ -21,6 +21,10 @@ public class Produto {
     @JoinColumn(name = "idLista")
     private Lista lista;
 
+    public Produto(){
+        
+    }
+
     public Produto(String nome, double precoEstimado, int quantidade, Lista lista){
         this.nome = nome;
         this.precoEstimado = precoEstimado;
