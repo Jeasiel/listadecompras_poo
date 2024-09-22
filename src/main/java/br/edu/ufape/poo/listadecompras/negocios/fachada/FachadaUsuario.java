@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroProduto;
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Produto;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
@@ -29,7 +30,7 @@ public class FachadaUsuario {
 
     @Autowired
     private InterfaceCadastroLista cadastroLista;
-    
+
     @Autowired
     private InterfaceCadastroProduto cadastroProduto;
 
@@ -97,6 +98,10 @@ public class FachadaUsuario {
         cadastroConta.salvarConta(new Usuario(nome, email, senha));
     }
 
+    public void criarConta(Conta conta) throws ContaDuplicadaException, EmailInvalidoExeception{
+        cadastroConta.salvarConta(conta);
+    }
+
     public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
         if(nome != null){
             usuarioLogado.setNome(nome);
@@ -125,5 +130,9 @@ public class FachadaUsuario {
         cadastroConta.removerConta(usuarioLogado);
     }
 
-    //Talvez seja necessário passar parte para a classe de negócio
+    //Extra, para teste (não apareceria em um sistema real)
+
+    public List<Conta> getUsuarios(){
+        return cadastroConta.listarContas();
+    }
 }

@@ -51,7 +51,7 @@ public class NegocioConta implements InterfaceCadastroConta{
 			throw new EmailInvalidoExeception(entity.getEmail());
 		}
 
-        if(repositorioContas.findByEmail(entity.getEmail()) != null){
+        if(repositorioContas.findByEmail(entity.getEmail()).size() > 0){
             throw new ContaDuplicadaException();
         }
 

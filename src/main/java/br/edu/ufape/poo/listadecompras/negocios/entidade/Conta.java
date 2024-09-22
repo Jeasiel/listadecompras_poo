@@ -25,6 +25,10 @@ public abstract class Conta{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Lista> listas;
 
+    public Conta(){
+
+    }
+    
     public Conta(String nome, String email, String senha){
         this.nome = nome;
         this.email = email;

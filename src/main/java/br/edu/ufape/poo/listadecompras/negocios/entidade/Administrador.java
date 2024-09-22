@@ -7,6 +7,10 @@ public class Administrador extends Conta {
 
 	private int nivelPermissao;
 
+	public Administrador(){
+		super();
+	}
+	
     public Administrador(String nome, String email, String senha, int nivelPermissao) {
         super(nome, email, senha);
 		this.nivelPermissao = nivelPermissao;
