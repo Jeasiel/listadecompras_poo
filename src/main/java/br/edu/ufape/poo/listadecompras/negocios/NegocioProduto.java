@@ -94,4 +94,20 @@ public class NegocioProduto implements InterfaceCadastroProduto{
     public boolean localizarIdProduto(long id){
         return repositorioProduto.findById(id) != null;
     }
+
+    public void setRepositorioListas(IRepositorioListas repositorioListas){
+        this.repositorioListas = repositorioListas;
+    }
+
+    public IRepositorioListas getRepositorioListas(){
+        return this.repositorioListas;
+    }
+
+    public void setRepositorioProduto(IRepositorioProduto repositorioProduto){
+        this.repositorioProduto = repositorioProduto;
+    }
+
+    public IRepositorioProduto getRepositorioProduto(){
+        return this.repositorioProduto;
+    }
 }

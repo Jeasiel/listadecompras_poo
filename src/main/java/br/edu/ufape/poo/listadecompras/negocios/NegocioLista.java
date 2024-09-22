@@ -77,4 +77,20 @@ public class NegocioLista implements InterfaceCadastroLista{
     public boolean localizarIdLista(long id){
         return repositorioListas.findById(id) != null;
     }
+
+    public void setRepositorioContas(IRepositorioContas repositorioContas){
+        this.repositorioContas = repositorioContas;
+    }
+
+    public IRepositorioContas getRepositorioContas(){
+        return this.repositorioContas;
+    }
+
+    public void setRepositorioListas(IRepositorioListas repositorioListas){
+        this.repositorioListas = repositorioListas;
+    }
+
+    public IRepositorioListas getRepositorioListas(){
+        return this.repositorioListas;
+    }
 }
