@@ -135,10 +135,6 @@ public class FachadaUsuario {
             cadastroConta.salvarConta(u);
         }
     }
-
-    public Usuario verConta(){
-        return usuarioLogado;
-    }
     
     public void deletarConta() throws ContaNaoEncontradaException{
         cadastroConta.removerConta(usuarioLogado);

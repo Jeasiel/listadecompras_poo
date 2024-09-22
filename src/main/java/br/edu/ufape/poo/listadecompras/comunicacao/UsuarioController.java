@@ -50,6 +50,16 @@ public class UsuarioController {
         return null;
     }
 
+    @PatchMapping("/usuario")
+    public void editarConta(@RequestParam String nome, @RequestParam String email, @RequestParam String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
+        fachadaUsuario.editarConta(nome, email, senha);
+    }
+
+    @DeleteMapping("/usuario")
+    public void deletarConta() throws ContaNaoEncontradaException{
+        fachadaUsuario.deletarConta();
+    }
+
     // Login
 
     @PostMapping("/usuario/login")
