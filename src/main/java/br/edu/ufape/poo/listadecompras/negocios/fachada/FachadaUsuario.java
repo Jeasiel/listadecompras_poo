@@ -53,6 +53,10 @@ public class FachadaUsuario {
         }
     }
 
+    public void duplicarLista(Lista l){
+        //Implementar
+    }
+
     public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
         if(nome != ""){
@@ -78,6 +82,10 @@ public class FachadaUsuario {
         cadastroProduto.salvarProduto(new Produto(nome, precoEstimado, quantidade, lista));
     }
 
+    public void adicionarProdutoID(String nome, double precoEstimado, int quantidade, long idLista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, NaoEncontradoPeloIdException{
+        adicionarProduto(nome, precoEstimado, quantidade, cadastroLista.localizarListaId(idLista).get());
+    }
+
     public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
         if(nome != ""){
@@ -93,7 +101,7 @@ public class FachadaUsuario {
     public List<Produto> getProdutosID(long id) throws ListaNaoEncontradaException, NaoEncontradoPeloIdException{
         return getProdutos(cadastroLista.localizarListaId(id).get());
     }
-    
+
     public List<Produto> getProdutos(Lista l) throws ListaNaoEncontradaException{
         return cadastroProduto.procurarProdutoLista(l);
     }
@@ -104,12 +112,8 @@ public class FachadaUsuario {
 
     //Mexe com conta
 
-    public void criarConta(String nome, String email, String senha) throws ContaNaoEncontradaException, ContaDuplicadaException, EmailInvalidoExeception{
+    public void criarContaUsuario(String nome, String email, String senha) throws ContaNaoEncontradaException, ContaDuplicadaException, EmailInvalidoExeception{
         cadastroConta.salvarConta(new Usuario(nome, email, senha));
-    }
-
-    public void criarConta(Conta conta) throws ContaDuplicadaException, EmailInvalidoExeception{
-        cadastroConta.salvarConta(conta);
     }
 
     public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
