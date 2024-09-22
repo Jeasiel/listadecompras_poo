@@ -87,6 +87,19 @@ public class NegocioConta implements InterfaceCadastroConta{
         return repositorioContas.findById(id);
     }
 
+    public Conta login(String email, String senha) throws NaoEncontradoPeloEmailException{
+        if(procurarContaEmail(email).size() > 0){
+            if(procurarContaEmail(email).get(0).getSenha() == senha){
+                return procurarContaEmail(email).get(0);
+            } else {
+                //throw new SenhaErradaException();
+            }
+        } else {
+            throw new NaoEncontradoPeloEmailException(email);
+        }
+        return null;
+    }
+
     public boolean localizarIdConta(long id){
         return repositorioContas.findById(id) != null;
     }

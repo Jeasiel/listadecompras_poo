@@ -23,4 +23,6 @@ public interface InterfaceCadastroConta {
 	void removerConta(Conta entity) throws ContaNaoEncontradaException;
 
 	Optional<Conta> localizarContaId(long id) throws NaoEncontradoPeloIdException;
+
+	Conta login(String email, String senha) throws NaoEncontradoPeloEmailException;
 }

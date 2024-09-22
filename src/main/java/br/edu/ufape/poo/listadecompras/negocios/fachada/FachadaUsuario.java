@@ -16,6 +16,7 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NomeInvalidoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
@@ -128,6 +129,14 @@ public class FachadaUsuario {
     
     public void deletarConta() throws ContaNaoEncontradaException{
         cadastroConta.removerConta(usuarioLogado);
+    }
+
+    public void login(String email, String senha) throws NaoEncontradoPeloEmailException{
+        usuarioLogado = (Usuario) cadastroConta.login(email, senha);
+    }
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
     //Extra, para teste (não apareceria em um sistema real)
