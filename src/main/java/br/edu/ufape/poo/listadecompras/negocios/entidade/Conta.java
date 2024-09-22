@@ -35,6 +35,10 @@ public abstract class Conta{
         this.senha = senha;
     }
 
+    public Conta() {
+    
+    }
+
     public String getNome() {
         return nome;
     }

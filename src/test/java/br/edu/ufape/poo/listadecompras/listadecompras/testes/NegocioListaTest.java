@@ -9,47 +9,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.edu.ufape.poo.listadecompras.dados.IRepositorioContas;
+import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
 
 @SpringBootTest
-public class NegocioContaTest {
+public class NegocioListaTest {
 
+    @Autowired
+    private IRepositorioListas repositoriolListas;
     @Autowired
     private IRepositorioContas repositorioContas;
 
-
     @Test
-    void salvarContaTeste(){
+    void salvarListaTeste(){
 
-        long qtdContas = repositorioContas.count();
-        Conta c = new Usuario("Aline", "aliinanda@gmail.com", "12345");
-   
-        repositorioContas.save(c);
-        long qtdContas2 = repositorioContas.count();
+        Conta c = repositorioContas.findByEmail("abrplaytube@gmail.com").get(0);
+        Lista a = new Lista("note", "Mercado", c);
+        long qtdLista = repositoriolListas.count();
+        repositoriolListas.save(a);
+        long qtdLista2 = repositoriolListas.count();
+        assertEquals(qtdLista + 1, qtdLista2);
 
-        assertEquals(qtdContas + 1, qtdContas2);
     } 
 
     @Test
-    void removerContaTeste(){
+    void removerListaTeste(){
 
-        long qtdContas = repositorioContas.count();
-        Conta c = repositorioContas.findByEmail("abrplaytube@gmail.com").get(0);
-        repositorioContas.delete(c);
-        long qtdContas2 = repositorioContas.count();
-
-        assertEquals(qtdContas - 1, qtdContas2);
+      
     } 
 
     @BeforeEach
-    void inicializarContaTeste(){
+    void inicializarListaTeste(){
 
         Conta c = new Usuario("Aline", "aliinanda@gmail.com", "12345");
         Conta a = new Usuario("Clauderson", "clauderson@gmail.com", "aFline");
         Conta b = new Usuario("Jeaso", "jeasiel@gmail.com", "codecode1");
         Conta d = new Usuario("Abraao", "abrplaytube@gmail.com", "abr15");
-        
+        Lista e = new Lista("note", "Mercado", c);
+
         repositorioContas.save(a);
         repositorioContas.save(b);
         repositorioContas.save(c);
