@@ -23,6 +23,7 @@ public class NegocioConta implements InterfaceCadastroConta{
     private IRepositorioContas repositorioContas;
     
 
+    @Override
     public List<Conta> procurarContaEmail(String email) 
     throws NaoEncontradoPeloEmailException{
         
@@ -33,6 +34,7 @@ public class NegocioConta implements InterfaceCadastroConta{
         return repositorioContas.findByEmail(email);
     }
 
+    @Override
     public void salvarConta(Conta entity)
     throws ContaDuplicadaException, EmailInvalidoExeception{
 
@@ -52,17 +54,19 @@ public class NegocioConta implements InterfaceCadastroConta{
 			throw new EmailInvalidoExeception(entity.getEmail());
 		}
 
-        if(repositorioContas.findByEmail(entity.getEmail()).size() > 0){
+        if(!repositorioContas.findByEmail(entity.getEmail()).isEmpty()){
             throw new ContaDuplicadaException();
         }
 
         repositorioContas.save(entity);
     }
 
+    @Override
 	public List<Conta> listarContas(){
         return repositorioContas.findAll();
     }
 
+    @Override
 	public void removerConta(long id)
     throws NaoEncontradoPeloIdException{
         if(!localizarIdConta(id)){
@@ -71,6 +75,7 @@ public class NegocioConta implements InterfaceCadastroConta{
         repositorioContas.deleteById(id);
     }
 
+    @Override
 	public void removerConta(Conta entity)
     throws ContaNaoEncontradaException{
         if(repositorioContas.findById(entity.getId()) == null){
@@ -80,6 +85,7 @@ public class NegocioConta implements InterfaceCadastroConta{
         repositorioContas.delete(entity);
     }
 
+    @Override
 	public Optional<Conta> localizarContaId(long id)
     throws NaoEncontradoPeloIdException{
         if(!localizarIdConta(id)){
@@ -88,8 +94,9 @@ public class NegocioConta implements InterfaceCadastroConta{
         return repositorioContas.findById(id);
     }
 
+    @Override
     public Conta login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
-        if(procurarContaEmail(email).size() > 0){
+        if(!procurarContaEmail(email).isEmpty()){
             if(procurarContaEmail(email).get(0).getSenha().equals(senha)){
                 return procurarContaEmail(email).get(0);
             } else {

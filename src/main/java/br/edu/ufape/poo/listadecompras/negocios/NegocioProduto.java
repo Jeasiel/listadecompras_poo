@@ -26,6 +26,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
     @Autowired
     private IRepositorioListas repositorioListas;
 
+    @Override
     public List<Produto> procurarProdutoLista(Lista lista)
     throws ListaNaoEncontradaException{
 
@@ -36,6 +37,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         return repositorioProduto.findByLista(lista);
     }
 
+    @Override
     public void salvarProduto(Produto entity)
     throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
 
@@ -57,10 +59,12 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         repositorioProduto.save(entity);
     }
 
+    @Override
 	public List<Produto> listarProdutos(){
         return repositorioProduto.findAll();
     }
 
+    @Override
 	public void removerProduto(long id)
     throws NaoEncontradoPeloIdException{
 
@@ -70,6 +74,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         repositorioProduto.deleteById(id);
     }
 
+    @Override
 	public void removerProduto(Produto entity)
     throws ProdutoNaoEncontradoException{
 
@@ -81,6 +86,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         
     }
 
+    @Override
 	public Optional<Produto> localizarProdutoId(long id)
     throws NaoEncontradoPeloIdException{
 

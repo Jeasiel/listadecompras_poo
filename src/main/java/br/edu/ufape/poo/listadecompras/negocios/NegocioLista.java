@@ -23,6 +23,7 @@ public class NegocioLista implements InterfaceCadastroLista{
     @Autowired
     private IRepositorioContas repositorioContas;
 
+    @Override
     public List<Lista> procurarListaConta(Conta conta)
     throws ContaNaoEncontradaException{
 
@@ -33,6 +34,7 @@ public class NegocioLista implements InterfaceCadastroLista{
         return repositorioListas.findByConta(conta);
     }
 
+    @Override
     public void salvarLista(Lista entity)
     throws ListaNaoEncontradaException{
 
@@ -42,10 +44,12 @@ public class NegocioLista implements InterfaceCadastroLista{
         repositorioListas.save(entity);
     }
 
+    @Override
 	public List<Lista> listarListas(){
         return repositorioListas.findAll();
     }
 
+    @Override
 	public void removerLista(long id)
     throws NaoEncontradoPeloIdException{
 
@@ -56,6 +60,7 @@ public class NegocioLista implements InterfaceCadastroLista{
         repositorioListas.deleteById(id);
     }
 
+    @Override
 	public void removerLista(Lista entity)
     throws ListaNaoEncontradaException{
         if(repositorioListas.findById(entity.getId()) == null){
@@ -64,6 +69,7 @@ public class NegocioLista implements InterfaceCadastroLista{
         repositorioListas.delete(entity);
     }
 
+    @Override
 	public Optional<Lista> localizarListaId(long id)
     throws NaoEncontradoPeloIdException{
 
