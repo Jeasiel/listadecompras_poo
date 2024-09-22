@@ -107,4 +107,12 @@ public class NegocioConta implements InterfaceCadastroConta{
     public long quantidadeContas(){
         return repositorioContas.count();
     }
+
+    public void setRepositorioContas(IRepositorioContas repositorioContas){
+        this.repositorioContas = repositorioContas;
+    }
+
+    public IRepositorioContas getRepositorioContas(){
+        return this.repositorioContas;
+    }
 }
