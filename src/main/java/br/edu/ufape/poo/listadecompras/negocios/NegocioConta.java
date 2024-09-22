@@ -27,7 +27,7 @@ public class NegocioConta implements InterfaceCadastroConta{
     throws NaoEncontradoPeloEmailException{
         
         if(repositorioContas.findByEmail(email) == null){
-            throw  new NaoEncontradoPeloEmailException(email);
+            throw new NaoEncontradoPeloEmailException(email);
         }
        
         return repositorioContas.findByEmail(email);
@@ -90,7 +90,7 @@ public class NegocioConta implements InterfaceCadastroConta{
 
     public Conta login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
         if(procurarContaEmail(email).size() > 0){
-            if(procurarContaEmail(email).get(0).getSenha() == senha){
+            if(procurarContaEmail(email).get(0).getSenha().equals(senha)){
                 return procurarContaEmail(email).get(0);
             } else {
                 throw new SenhaErradaException();

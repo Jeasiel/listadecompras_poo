@@ -41,10 +41,10 @@ public class FachadaUsuario {
     //Mexe com lista
     public void criarLista(String nome, String tipo) throws ListaNaoEncontradaException{
         boolean criado = false;
-        if(nome != null && tipo != null){
+        if(nome != "" && tipo != ""){
             criado = true;
             cadastroLista.salvarLista(new Lista(nome, tipo, usuarioLogado));
-        } else if(nome != null){
+        } else if(nome != ""){
             criado = true;
             cadastroLista.salvarLista(new Lista(nome, usuarioLogado));
         }
@@ -55,8 +55,12 @@ public class FachadaUsuario {
 
     public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
-        inner.setNome(nome);
-        inner.setTipo(tipo);
+        if(nome != ""){
+            inner.setNome(nome);
+        }
+        if(tipo != ""){
+            inner.setTipo(tipo);
+        }
         cadastroLista.removerLista(l.getId());
         cadastroLista.salvarLista(inner);
     }
@@ -76,7 +80,7 @@ public class FachadaUsuario {
 
     public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
-        if(nome != null){
+        if(nome != ""){
             p.setNome(nome);
         }
         if(quantidade != 0){
@@ -86,6 +90,10 @@ public class FachadaUsuario {
         cadastroProduto.salvarProduto(p);
     }
 
+    public List<Produto> getProdutosID(long id) throws ListaNaoEncontradaException, NaoEncontradoPeloIdException{
+        return getProdutos(cadastroLista.localizarListaId(id).get());
+    }
+    
     public List<Produto> getProdutos(Lista l) throws ListaNaoEncontradaException{
         return cadastroProduto.procurarProdutoLista(l);
     }
@@ -105,16 +113,16 @@ public class FachadaUsuario {
     }
 
     public void editarConta(String nome, String email, String senha) throws NaoEncontradoPeloIdException, ContaDuplicadaException, EmailInvalidoExeception{
-        if(nome != null){
+        if(nome != ""){
             usuarioLogado.setNome(nome);
         }
-        if(email != null){
+        if(email != ""){
             usuarioLogado.setEmail(email);
         }
-        if(senha != null){
+        if(senha != ""){
             usuarioLogado.setSenha(senha);
         }
-        if(!(nome != null && email != null && senha != null)){
+        if(!(nome != "" && email != "" && senha != "")){
             Usuario u = (Usuario) cadastroConta.localizarContaId(usuarioLogado.getId()).get();
             u.setNome(nome);
             u.setEmail(email);
