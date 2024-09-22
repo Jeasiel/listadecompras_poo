@@ -36,8 +36,14 @@ public class NegocioListaTest {
 
     @Test
     void removerListaTeste(){
+        Conta c = repositorioContas.findByEmail("abrplaytube@gmail.com").get(0);
+        Lista a = new Lista("note", "Mercado", c);
+        repositoriolListas.save(a);
+        long qtdLista = repositoriolListas.count();
+        repositoriolListas.delete(a);
+        long qtdLista2 = repositoriolListas.count();
+        assertEquals(qtdLista - 1, qtdLista2);
 
-      
     } 
 
     @BeforeEach
@@ -47,13 +53,12 @@ public class NegocioListaTest {
         Conta a = new Usuario("Clauderson", "clauderson@gmail.com", "aFline");
         Conta b = new Usuario("Jeaso", "jeasiel@gmail.com", "codecode1");
         Conta d = new Usuario("Abraao", "abrplaytube@gmail.com", "abr15");
-        Lista e = new Lista("note", "Mercado", c);
+
 
         repositorioContas.save(a);
         repositorioContas.save(b);
         repositorioContas.save(c);
         repositorioContas.save(d);
-
 
     } 
 }

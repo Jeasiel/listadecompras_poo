@@ -35,7 +35,7 @@ public class NegocioContaTest {
     void removerContaTeste(){
 
         long qtdContas = repositorioContas.count();
-        Conta c = repositorioContas.findByEmail("abrplaytube@gmail.com").get(0);
+        Conta c = repositorioContas.findByEmail("aliinanda@gmail.com").get(0);
         repositorioContas.delete(c);
         long qtdContas2 = repositorioContas.count();
 

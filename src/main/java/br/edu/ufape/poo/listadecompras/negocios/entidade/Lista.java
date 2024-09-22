@@ -27,6 +27,9 @@ public class Lista {
     @JoinColumn(name = "conta")
     private Conta conta;
 
+    public Lista(){
+    }
+
     public Lista(Conta conta){
         nome = "Lista";
         tipo = "Indefinido";
