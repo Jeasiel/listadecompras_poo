@@ -35,7 +35,7 @@ public class NegocioListaTest {
     
 
     @Test
-    void salvarListaTeste() throws ListaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException{
+    void salvarListaTeste() throws ListaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException, ContaNaoEncontradaException{
 
         long qtdLista = repositorioListas.count();
         fachada.criarLista("note", "Mercado");
@@ -55,7 +55,7 @@ public class NegocioListaTest {
     } 
 
     @BeforeEach
-    void inicializarListaTeste() throws ListaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException{
+    void inicializarListaTeste() throws ListaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException, ContaNaoEncontradaException{
 
         Conta c = new Usuario("Aline", "aliinanda@gmail.com", "12345");
         Conta a = new Usuario("Clauderson", "clauderson@gmail.com", "aFline");

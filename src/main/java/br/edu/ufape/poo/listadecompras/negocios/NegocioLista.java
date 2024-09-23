@@ -31,16 +31,26 @@ public class NegocioLista implements InterfaceCadastroLista{
             throw new ContaNaoEncontradaException(conta);
         }
 
-        return repositorioListas.findByConta(conta);
+        return repositorioContas.findById(conta.getId()).get().getListas();
     }
 
     @Override
-    public void salvarLista(Lista entity)
-    throws ListaNaoEncontradaException{
+    public void salvarLista(Lista entity, Conta conta)
+    throws ListaNaoEncontradaException, ContaNaoEncontradaException{
 
         if(repositorioListas.findById(entity.getId()) == null){
             throw new ListaNaoEncontradaException(entity);
         }
+
+        if(repositorioContas.findById(conta.getId()).get() == null){
+            throw new ContaNaoEncontradaException(conta);
+        }
+
+        Conta innerConta = repositorioContas.findById(conta.getId()).get();
+        List<Lista> inner = innerConta.getListas();
+        inner.add(entity);
+        innerConta.setListas(inner);
+        repositorioContas.save(innerConta);
         repositorioListas.save(entity);
     }
 
@@ -61,12 +71,22 @@ public class NegocioLista implements InterfaceCadastroLista{
     }
 
     @Override
-	public void removerLista(Lista entity)
-    throws ListaNaoEncontradaException{
+	public void removerLista(Lista entity, Conta conta)
+    throws ListaNaoEncontradaException, ContaNaoEncontradaException{
         if(repositorioListas.findById(entity.getId()) == null){
             throw new ListaNaoEncontradaException(entity);
         }
+
+        if(repositorioContas.findById(conta.getId()).get() == null){
+            throw new ContaNaoEncontradaException(conta);
+        }
+
+        Conta innerConta = repositorioContas.findById(conta.getId()).get();
+        List<Lista> inner = innerConta.getListas();
+        inner.remove(entity);
+        innerConta.setListas(inner);
         repositorioListas.delete(entity);
+        repositorioContas.save(innerConta);
     }
 
     @Override

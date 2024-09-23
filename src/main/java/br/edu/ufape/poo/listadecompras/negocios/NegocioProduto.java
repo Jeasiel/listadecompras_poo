@@ -34,12 +34,12 @@ public class NegocioProduto implements InterfaceCadastroProduto{
             throw new ListaNaoEncontradaException(lista);
         }
 
-        return repositorioProduto.findByLista(lista);
+        return repositorioListas.findById(lista.getId()).get().getListaProdutos();
     }
 
     @Override
-    public void salvarProduto(Produto entity)
-    throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
+    public void salvarProduto(Produto entity, Lista lista)
+    throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException{
 
         if(entity.getNome().length() == 1){
 			throw new NomeInvalidoException();
@@ -52,8 +52,17 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         if(entity.getPrecoEstimado() <= 0){
             throw new ValorInvalidoException();
         }
-        
-        repositorioProduto.save(entity);
+
+        if(repositorioListas.findById(lista.getId()).get() == null){
+            throw new ListaNaoEncontradaException(lista);
+        }
+
+        Lista innerLista = repositorioListas.findById(lista.getId()).get();
+        List<Produto> inner = innerLista.getListaProdutos();
+        inner.add(entity);
+        innerLista.setListaProdutos(inner);
+        repositorioListas.save(innerLista);
+        repositorioProduto.save(entity); //?
     }
 
     @Override
@@ -72,15 +81,23 @@ public class NegocioProduto implements InterfaceCadastroProduto{
     }
 
     @Override
-	public void removerProduto(Produto entity)
-    throws ProdutoNaoEncontradoException{
+	public void removerProduto(Produto entity, Lista lista)
+    throws ProdutoNaoEncontradoException, ListaNaoEncontradaException{
 
         if(repositorioProduto.findById(entity.getId()) == null){
             throw new ProdutoNaoEncontradoException(entity);
         }
 
-        repositorioProduto.delete(entity);
-        
+        if(repositorioListas.findById(lista.getId()).get() == null){
+            throw new ListaNaoEncontradaException(lista);
+        }
+
+        Lista innerLista = repositorioListas.findById(lista.getId()).get();
+        List<Produto> inner = innerLista.getListaProdutos();
+        inner.remove(entity); //Provável
+        innerLista.setListaProdutos(inner);
+        repositorioProduto.delete(entity); // Provável
+        repositorioListas.save(innerLista);
     }
 
     @Override

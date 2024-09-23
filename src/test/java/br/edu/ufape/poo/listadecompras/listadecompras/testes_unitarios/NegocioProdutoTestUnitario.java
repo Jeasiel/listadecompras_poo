@@ -52,11 +52,11 @@ public class NegocioProdutoTestUnitario {
         repositorioContas.save(c);
         repositorioContas.save(d);
 
-        Lista a1 = new Lista("note", "Mercado", a);
-        repositorioLista.save(a1);
+        //Lista a1 = new Lista("note", "Mercado", a);
+        //repositorioLista.save(a1);
 
-        Produto p1 = new Produto("feijão", 12.90, 5, a1);
-        repositorioProduto.save(p1);
+        //Produto p1 = new Produto("feijão", 12.90, 5, a1);
+        //repositorioProduto.save(p1);
 
         negociosConta = new NegocioConta();
         negociosConta.setRepositorioContas(repositorioContas);

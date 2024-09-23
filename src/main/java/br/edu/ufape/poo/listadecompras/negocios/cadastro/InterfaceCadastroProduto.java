@@ -17,13 +17,13 @@ public interface InterfaceCadastroProduto {
     
     List<Produto> procurarProdutoLista(Lista lista) throws ListaNaoEncontradaException;
 
-    void salvarProduto(Produto entity) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException;
+    void salvarProduto(Produto entity, Lista lista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException;
 
 	List<Produto> listarProdutos();
 
 	void removerProduto(long id) throws NaoEncontradoPeloIdException;
 
-	void removerProduto(Produto entity) throws ProdutoNaoEncontradoException;
+	void removerProduto(Produto entity, Lista lista) throws ProdutoNaoEncontradoException, ListaNaoEncontradaException;
 
 	Optional<Produto> localizarProdutoId(long id) throws NaoEncontradoPeloIdException;
 }

@@ -45,8 +45,8 @@ public class NegocioListaTestUnitario {
         repositorioContas.save(c);
         repositorioContas.save(d);
 
-        Lista a1 = new Lista("note", "Mercado", a);
-        repositorioLista.save(a1);
+        //Lista a1 = new Lista("note", "Mercado", a);
+        //repositorioLista.save(a1);
 
         negociosConta = new NegocioConta();
         negociosConta.setRepositorioContas(repositorioContas);

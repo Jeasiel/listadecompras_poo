@@ -11,6 +11,6 @@ import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 @Repository
 public interface IRepositorioListas extends JpaRepository<Lista, Long>{ 
 
-	public ArrayList<Lista> findByConta(Conta conta);
+	//public ArrayList<Lista> findByConta(Conta conta);
 
 }
