@@ -20,8 +20,10 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdExce
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
+@Transactional
 public class NegocioListaTest {
 
     @Autowired
@@ -47,6 +49,8 @@ public class NegocioListaTest {
     @Test
     void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException, ProdutoNaoEncontradoException{
 
+        fachada.login("clauderson@gmail.com", "aFline");
+        fachada.criarLista("funfa", "jae");
         long qtdLista = repositorioListas.count();
         fachada.removerLista(fachada.getListas().get(0));
         long qtdLista2 = repositorioListas.count();
@@ -75,8 +79,7 @@ public class NegocioListaTest {
         negocioLista.setRepositorioListas(repositorioListas);
         negocioLista.setRepositorioContas(repositorioContas);
         fachada.setCadastroLista(negocioLista);
-        fachada.login("aliinanda@gmail.com", "12345");
-        fachada.criarLista("funfa", "pf");
+        
 
         
     } 
