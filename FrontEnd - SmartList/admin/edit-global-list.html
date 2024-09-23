@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Editar Lista Global</title>
+    <link rel="stylesheet" href="/FrontEnd - SmartList/estilo.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="/FrontEnd - SmartList/images/logo (1).png" alt="Logo" class="logo" width="50">
+        <h1>SmartList</h1>
+        <nav>
+            <a href="../admin/admin-dashboard.html">Painel do Administrador</a>
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Editar Lista Global</h2>
+        <form id="edit-global-list-form">
+            <label for="global-list-name">Nome da Lista:</label>
+            <input type="text" id="global-list-name" value="Nome da Lista Global" required>
+
+            <label for="global-list-tag">Categoria:</label>
+            <select id="global-list-tag" required>
+                <option value="mercado">Mercado</option>
+                <option value="farmacia">Farmácia</option>
+                <option value="casa">Casa e Limpeza</option>
+                <option value="ingredientes">Ingredientes para Receitas</option>
+                <option value="material">Material Escolar</option>
+                <option value="roupas">Roupas e Acessórios</option>
+                <option value="outros">Outros</option>
+            </select>
+
+            <h3>Itens:</h3>
+            <ul id="global-items-container">
+                <li>
+                    <input type="text" placeholder="Nome do produto" value="Produto Exemplo" required>
+                    <input type="number" placeholder="Preço Estimado (R$)" value="10.00" required>
+                    <input type="number" placeholder="Quantidade Desejada" value="1" required>
+                    <button type="button" onclick="removeGlobalItem(this)">Remover</button>
+                </li>
+            </ul>
+            <button type="button" onclick="addGlobalItem()">Adicionar Item</button>
+
+            <button type="submit">Salvar Lista Global</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function addGlobalItem() {
+            const itemsContainer = document.getElementById('global-items-container');
+            const newItem = document.createElement('li');
+            newItem.innerHTML = `<input type="text" placeholder="Nome do produto" required>
+                                 <input type="number" placeholder="Preço Estimado (R$)" required>
+                                 <input type="number" placeholder="Quantidade Desejada" required>
+                                 <button type="button" onclick="removeGlobalItem(this)">Remover</button>`;
+            itemsContainer.appendChild(newItem);
+        }
+
+        function removeGlobalItem(button) {
+            const item = button.parentElement;
+            item.remove();
+        }
+    </script>
+</body>
+</html>

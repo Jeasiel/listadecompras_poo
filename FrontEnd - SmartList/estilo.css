@@ -1,0 +1,186 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+}
+
+body {
+    background-color: #f0f0f0; /* Cinza claro */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #6a1b9a; /* Roxo */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header nav {
+    margin-top: 10px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px 15px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+header nav a:hover {
+    background-color: white;
+    color: #6a1b9a; /* Roxo */
+    border-color: #6a1b9a;
+}
+
+/* Estilo do conteúdo principal */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centralizar conteúdo */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilo dos formulários */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+    text-align: left; /* Alinhamento do texto do formulário */
+}
+
+form label {
+    font-weight: bold;
+}
+
+form input, form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+form input:focus {
+    border-color: #6a1b9a; /* Roxo */
+    outline: none;
+}
+
+form button {
+    padding: 10px;
+    background-color: #6a1b9a; /* Roxo */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #5e35b1; /* Roxo mais escuro */
+}
+
+/* Estilo de tabelas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #6a1b9a; /* Roxo */
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f7f7f7; /* Cinza claro */
+}
+
+/* Botões de ações */
+.list-actions button {
+    padding: 5px 10px;
+    background-color: #6a1b9a; /* Roxo */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.list-actions button:hover {
+    background-color: #5e35b1; /* Roxo mais escuro */
+}
+
+/* Cartões de listas */
+.card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de tags */
+.tag {
+    display: inline-block;
+    background-color: #6a1b9a; /* Roxo */
+    color: white;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.tag.alt {
+    background-color: #f44336; /* Exemplo de outra cor de tag */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header nav a {
+        display: block;
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    main {
+        padding: 15px;
+    }
+}
+ul {
+    list-style-type: none; /* Remove os marcadores */
+    padding: 0; /* Remove o preenchimento padrão */
+    margin: 0; /* Remove a margem padrão */
+}

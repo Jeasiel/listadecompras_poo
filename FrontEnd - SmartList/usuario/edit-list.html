@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Editar Lista</title>
+    <link rel="stylesheet" href="./estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="./images/logo (1).png" alt="Logo" class="logo" width="50">
+        <nav>
+            <a href="./usuario/user-dashboard.html">Painel do Usuário</a>
+            <a href="./index.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Editar Lista</h2>
+        <form id="lista-form">
+            <label for="lista-nome">Nome da Lista:</label>
+            <input type="text" id="lista-nome" value="Nome da Lista Existente" required>
+
+            <label for="lista-tag">Categoria:</label>
+            <select id="lista-tag" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="mercado">Mercado</option>
+                <option value="farmacia">Farmácia</option>
+                <option value="casa">Casa e Limpeza</option>
+                <option value="ingredientes">Ingredientes para Receitas</option>
+                <option value="material">Material Escolar</option>
+                <option value="roupas">Roupas e Acessórios</option>
+                <option value="outros">Outros</option>
+            </select>
+
+            <h3>Itens:</h3>
+            <ul id="itens-container">
+                <li>
+                    <input type="text" placeholder="Nome do produto" value="Produto 1" required>
+                    <input type="number" placeholder="Quantidade Desejada" value="2" required>
+                    <button type="button" onclick="removeItem(this)">Remover</button>
+                </li>
+                <li>
+                    <input type="text" placeholder="Nome do produto" value="Produto 2" required>
+                    <input type="number" placeholder="Quantidade Desejada" value="1" required>
+                    <button type="button" onclick="removeItem(this)">Remover</button>
+                </li>
+            </ul>
+            <button type="button" onclick="addItem()">Adicionar Item</button>
+
+            <button type="submit">Salvar Lista</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function addItem() {
+            const itensContainer = document.getElementById('itens-container');
+            const newItem = document.createElement('li');
+            newItem.innerHTML = `<input type="text" placeholder="Nome do produto" required>
+                                 <input type="number" placeholder="Preço Estimado (R$)" required>
+                                 <input type="number" placeholder="Quantidade Desejada" required>
+                                 <button type="button" onclick="removeItem(this)">Remover</button>`;
+            itensContainer.appendChild(newItem);
+        }
+
+        function removeItem(button) {
+            const item = button.parentElement;
+            item.remove();
+        }
+    </script>
+</body>
+</html>

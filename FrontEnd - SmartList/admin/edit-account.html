@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Editar Conta</title>
+    <link rel="stylesheet" href="/FrontEnd - SmartList/estilo.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="/FrontEnd - SmartList/images/logo (1).png" alt="Logo" class="logo" width="50">
+        <h1>SmartList</h1>
+        <nav>
+            <a href="../admin/admin-dashboard.html">Painel do Administrador</a>
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Editar Conta</h2>
+        <form id="edit-account-form">
+            <label for="account-name">Nome do Usuário:</label>
+            <input type="text" id="account-name" value="Nome Exemplo" required>
+
+            <label for="account-email">E-mail:</label>
+            <input type="email" id="account-email" value="exemplo@dominio.com" required>
+
+            <label for="account-password">Senha:</label>
+            <input type="password" id="account-password" placeholder="Digite a nova senha">
+
+            <label for="account-role">Função:</label>
+            <select id="account-role" required>
+                <option value="usuario">Usuário</option>
+                <option value="administrador">Administrador</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

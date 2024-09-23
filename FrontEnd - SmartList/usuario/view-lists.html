@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Minhas Listas</title>
+    <link rel="stylesheet" href="/FrontEnd - SmartList/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="script.js" defer>
+    </script>
+</head>
+<body>
+    <header>
+        <img src="/FrontEnd - SmartList/images/logo (1).png" alt="Logo" class="logo" width="50">
+        <h1>Minhas Listas de Compras</h1>
+        <nav>
+            <a href="user-dashboard.html">Painel do Usuário</a>
+            <a href="create-list.html">Criar Nova Lista</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Suas Listas</h2>
+
+        <section id="list-section">
+            <!-- Exemplo de lista -->
+            <div class="list-item">
+                <h3>Supermercado</h3>
+                <p>Categoria: Supermercado</p>
+                <p>Custo Total Estimado: R$ 150,00</p>
+                <button class="edit-btn" data-id="1">Editar</button>
+                <button class="delete-btn" data-id="1">Excluir</button>
+            </div>
+
+            <div class="list-item">
+                <h3>Farmácia</h3>
+                <p>Categoria: Saúde</p>
+                <p>Custo Total Estimado: R$ 75,00</p>
+                <button class="edit-btn" data-id="2">Editar</button>
+                <button class="delete-btn" data-id="2">Excluir</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Criar Lista</title>
+    <link rel="stylesheet" href="../estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="/FrontEnd - SmartList/images/logo (1).png" alt="Logo" class="logo" width="50">
+        <h1>Criar ou Editar Lista</h1>
+        <nav>
+            <a href="/FrontEnd - SmartList/usuario/user-dashboard.html">Usuário</a>
+            <a href="/FrontEnd - SmartList/index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="lista-form">
+            <label for="lista-nome">Nome da Lista:</label>
+            <input type="text" id="lista-nome" required>
+
+            <label for="lista-tag">Categoria:</label>
+            <select id="lista-tag" required>
+                <option value="">Selecione uma categoria</option>
+                <option value="mercado">Mercado</option>
+                <option value="farmacia">Farmácia</option>
+                <option value="casa">Casa e Limpeza</option>
+                <option value="ingredientes">Ingredientes para Receitas</option>
+                <option value="material">Material Escolar</option>
+                <option value="roupas">Roupas e Acessórios</option>
+                <option value="outros">Outros</option>
+                <option value="personalizada">Criar nova categoria</option>
+            </select>
+
+            <div id="nova-tag-container" style="display: none;">
+                <label for="nova-tag">Nova Categoria:</label>
+                <input type="text" id="nova-tag" placeholder="Digite uma nova categoria">
+            </div>
+
+            <h3>Itens:</h3>
+            <ul id="itens-container">
+                <li>
+                    <input type="text" placeholder="Nome do produto" required>
+                    <input type="number" placeholder="Preço Estimado (R$)" required>
+                    <input type="number" placeholder="Quantidade Desejada" required>
+                    <button type="button" onclick="removeItem(this)">Remover</button>
+                </li>
+            </ul>
+            <button type="button" onclick="addItem()">Adicionar Item</button>
+
+            <button type="submit">Salvar Lista</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Exibe ou esconde o campo de nova categoria
+        document.getElementById('lista-tag').addEventListener('change', function() {
+            const novaTagContainer = document.getElementById('nova-tag-container');
+            novaTagContainer.style.display = this.value === 'personalizada' ? 'block' : 'none';
+        });
+
+        // Adiciona um novo item à lista
+        function addItem() {
+            const itensContainer = document.getElementById('itens-container');
+            const newItem = document.createElement('li');
+            newItem.innerHTML = `<input type="text" placeholder="Nome do produto" required>
+                                 <input type="number" placeholder="Preço Estimado (R$)" required>
+                                 <input type="number" placeholder="Quantidade Desejada" required>
+                                 <button type="button" onclick="removeItem(this)">Remover</button>`;
+            itensContainer.appendChild(newItem);
+        }
+
+        // Remove um item da lista
+        function removeItem(button) {
+            const item = button.parentElement;
+            item.remove();
+        }
+    </script>
+</body>
+</html>
