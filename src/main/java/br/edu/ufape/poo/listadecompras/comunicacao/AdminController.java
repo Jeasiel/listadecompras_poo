@@ -19,7 +19,9 @@ import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaDuplicadaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.EmailInvalidoExeception;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaAdmin;
 
 @CrossOrigin
@@ -50,8 +52,8 @@ public class AdminController {
     // Login
 
     @PostMapping("/admin/login")
-    public void login(String email, String senha){
-
+    public void login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
+        fachadaAdmin.login(email, senha);
     }
 
     @GetMapping("/admin/login")
