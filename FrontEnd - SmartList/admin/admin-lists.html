@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartList - Listas Globais</title>
+    <link rel="stylesheet" href="/FrontEnd - SmartList/estilo.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <img src="/FrontEnd - SmartList/images/logo (1).png" alt="Logo" class="logo" width="50">
+        <h1>Gerenciar Listas Globais</h1>
+        <nav>
+            <a href="../admin/admin-dashboard.html">Painel do Administrador</a>
+            <a href="../index.html">Home</a>
+        </nav>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome da Lista</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lista de Mercado</td>
+                    <td>Mercado</td>
+                    <td>
+                        <a href="edit-global-list.html">Editar</a>
+                        <button onclick="confirmDelete()">Excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lista de Farmácia</td>
+                    <td>Farmácia</td>
+                    <td>
+                        <a href="edit-global-list.html">Editar</a>
+                        <button onclick="confirmDelete()">Excluir</button>
+                    </td>
+                </tr>
+                <!-- Adicione mais listas conforme necessário -->
+            </tbody>
+        </table>
+        <button onclick="location.href='create-global-list.html'">Criar Nova Lista Global</button>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SmartList. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function confirmDelete() {
+            if (confirm("Tem certeza que deseja excluir esta lista?")) {
+                // Lógica para excluir a lista
+                alert("Lista excluída com sucesso!");
+            }
+        }
+    </script>
+</body>
+</html>
