@@ -83,9 +83,13 @@ public class NegocioLista implements InterfaceCadastroLista{
 
         Conta innerConta = repositorioContas.findById(conta.getId()).get();
         List<Lista> inner = innerConta.getListas();
-        inner.remove(entity);
+        for(int i = 0; i < inner.size(); i++){
+            if(inner.get(i).getId() == entity.getId()){
+                inner.remove(i);
+                break;
+            }
+        }
         innerConta.setListas(inner);
-        repositorioListas.delete(entity);
         repositorioContas.save(innerConta);
     }
 

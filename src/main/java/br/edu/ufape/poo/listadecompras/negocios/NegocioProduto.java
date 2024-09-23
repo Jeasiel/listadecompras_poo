@@ -62,7 +62,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         inner.add(entity);
         innerLista.setListaProdutos(inner);
         repositorioListas.save(innerLista);
-        repositorioProduto.save(entity); //?
+        repositorioProduto.save(entity);
     }
 
     @Override
@@ -94,10 +94,15 @@ public class NegocioProduto implements InterfaceCadastroProduto{
 
         Lista innerLista = repositorioListas.findById(lista.getId()).get();
         List<Produto> inner = innerLista.getListaProdutos();
-        inner.remove(entity); //Provável
+        for(int i = 0; i < inner.size(); i++){
+            if(inner.get(i).getId() == entity.getId()){
+                inner.remove(i);
+                break;
+            }
+        }
         innerLista.setListaProdutos(inner);
-        repositorioProduto.delete(entity); // Provável
         repositorioListas.save(innerLista);
+        //remove (finalmente)
     }
 
     @Override
