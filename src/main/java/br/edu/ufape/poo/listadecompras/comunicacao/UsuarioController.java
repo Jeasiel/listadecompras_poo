@@ -29,7 +29,6 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoExc
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.QuantidadeInvalidaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ValorInvalidoException;
-import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaAdmin;
 import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
 
 @CrossOrigin
