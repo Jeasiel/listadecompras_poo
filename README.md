@@ -1,43 +1,48 @@
-# Projeto: Lista de Compras
-## Informações do Projeto
-- Feito para a matéria de POO 2024.1.
-- Demais comentários e anotações da equipe estarão aqui para que possamos gerenciar bem o que estamos fazendo.
-- Comentários rápidos colocar quando fizer commit.
+# SmartList - Lista de Compras
 
-## Estrutura Geral
+<img src="1.png" alt="logo">
 
-`src`: Pasta contendo o código (separada em pastas que são os packages).
+> O SmartList permite criar e gerir listas de compras de forma simples e eficiente. Com uma interface intuitiva, pode adicionar, remover e organizar itens de acordo com suas necessidades. Ideal para manter o controlo das suas compras.
 
-## Estrutura de Pacotes (packages)
+## 🌱 Informações do Projeto
+- Projeto para disciplina de POO 2024.1.
 
-Fazer
+## ☕ Linguagens
 
-## Comandos Rápidos do Git
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"/>
 
-> Para configurar, consultar o guia que a professora disponibilizou (mas vai usar `git config`).
+## 🤝 Colaboradores
 
-> Para checar a configuração, use `git config --list` e para sair da visualização do comando, use `Shift + Q`
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
-`git init`: Inicializa a pasta atual para que o Git considere como um novo "espaço de trabalho".
-
-`git add .`: Adiciona os arquivos no repositório local.
-
-`git commit -m "mensagem do commit"`: Adiciona as mudanças no repositório local.
-
-> Os próximos dois comandos só precisam ser feitos uma vez na pasta usada para o repositório.
-
-`git branch -M main`: Diz qual será o "branch" que será editado.
-
-`git remote add origin https://github.com/username/repo.git`: Diz qual repositório no **Github** será modificado (para combinar com o repositório local), que no nosso caso é `git remote add origin https://github.com/Jeasiel/listadecompras_poo.git`.
-
-> Os seguintes comandos usam o repositório remoto (do Github).
-
-`git push -u origin main`: Publica o repositório para o Github.
-
-`git pull origin main`: Atualiza o "branch" atual caso esteja atrasado em relação ao publicado no Github.
-
-## Ferramentas que serão utilizadas
-**Maven**
-**Spring**
-**Lombok**
-**H2**
+<table>
+  <tr>
+    <td align="center">
+      <a href="#" title="defina o título do link">
+        <img src="https://avatars.githubusercontent.com/u/52468572?v=4" width="100px;" alt="Foto do Jeasiel Abner"/><br>
+        <sub>
+          <b>Jeasiel Abner</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#" title="defina o título do link">
+        <img src="https://avatars.githubusercontent.com/u/159023161?v=4" width="100px;" alt="Foto do Clauderson Branco"/><br>
+        <sub>
+          <b>Clauderson Branco</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#" title="defina o título do link">
+        <img src="https://avatars.githubusercontent.com/u/121042844?s=400&u=6abcc5058b24e30e4da19fdb16f51720ee655a4d&v=4" width="100px;" alt="Foto do Aline Fernanda"/><br>
+        <sub>
+          <b>Aline Fernanda</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
