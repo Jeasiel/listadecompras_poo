@@ -1,10 +1,12 @@
 package br.edu.ufape.poo.listadecompras.negocios.fachada;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroConta;
-import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroLista;
-import br.edu.ufape.poo.listadecompras.negocios.cadastro.InterfaceCadastroProduto;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Administrador;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
@@ -15,8 +17,10 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailE
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 
+@Service
 public class FachadaAdmin {
     
+	@Autowired
 	private InterfaceCadastroConta cadastroConta;
 
 	private Administrador adminLogado;
@@ -66,23 +70,29 @@ public class FachadaAdmin {
         }
     }
 	public void deletarConta() throws ContaNaoEncontradaException{
-        cadastroConta.removerConta(adminLogado);
+		cadastroConta.removerConta(adminLogado);
+		logoff();
     }
 
     public void login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
         this.adminLogado = (Administrador) cadastroConta.login(email, senha);
     }
 
+	public void logoff(){
+        this.adminLogado = null;
+    }
+
     public Administrador getAdminLogado() {
         return adminLogado;
     }
 
-	public List<Conta> getUsuarios(){
+	public List<Usuario> getUsuarios(){
+		List<Usuario> out = new ArrayList<>();
 		for(int i = 0; i < cadastroConta.listarContas().size(); i++){
 			if(cadastroConta.listarContas().get(i).getClass() != new Administrador().getClass()){
-				
+				out.add((Usuario) cadastroConta.listarContas().get(i));
 			}
 		}
-		return cadastroConta.listarContas();
+		return out;
 	}
 }

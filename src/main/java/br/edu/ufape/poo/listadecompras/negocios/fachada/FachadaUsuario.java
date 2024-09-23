@@ -53,10 +53,6 @@ public class FachadaUsuario {
         }
     }
 
-    public void duplicarLista(Lista l){
-        //Implementar
-    }
-
     public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ContaNaoEncontradaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
         if(!"".equals(nome)){
@@ -145,11 +141,16 @@ public class FachadaUsuario {
     }
     
     public void deletarConta() throws ContaNaoEncontradaException{
+        logoff();
         cadastroConta.removerConta(usuarioLogado);
     }
 
     public void login(String email, String senha) throws NaoEncontradoPeloEmailException, SenhaErradaException{
         this.usuarioLogado = (Usuario) cadastroConta.login(email, senha);
+    }
+
+    public void logoff(){
+        this.usuarioLogado = null;
     }
 
     public Usuario getUsuarioLogado() {
