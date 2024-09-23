@@ -13,13 +13,13 @@ public interface InterfaceCadastroLista {
     
     List<Lista> procurarListaConta(Conta conta) throws ContaNaoEncontradaException;
 
-    void salvarLista(Lista entity) throws ListaNaoEncontradaException;
+    void salvarLista(Lista entity, Conta conta) throws ListaNaoEncontradaException, ContaNaoEncontradaException;
 
 	List<Lista> listarListas();
 
 	void removerLista(long id) throws NaoEncontradoPeloIdException;
 
-	void removerLista(Lista entity) throws ListaNaoEncontradaException;
+	void removerLista(Lista entity, Conta conta) throws ListaNaoEncontradaException, ContaNaoEncontradaException;
 
 	Optional<Lista> localizarListaId(long id) throws NaoEncontradoPeloIdException;
 }

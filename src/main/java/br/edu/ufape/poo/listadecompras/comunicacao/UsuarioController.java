@@ -35,6 +35,7 @@ import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
 @RestController
 @RequestMapping("/api/v1")
 public class UsuarioController {
+    
     @Autowired
     public FachadaUsuario fachadaUsuario;
 
@@ -82,17 +83,17 @@ public class UsuarioController {
     }
     
     @PostMapping("/usuario/listas")
-    public void criarLista(@RequestParam String nome, @RequestParam String tipo) throws ListaNaoEncontradaException {
+    public void criarLista(@RequestParam String nome, @RequestParam String tipo) throws ListaNaoEncontradaException, ContaNaoEncontradaException {
         fachadaUsuario.criarLista(nome, tipo);
     }
     
     @PatchMapping("/usuario/listas")
-    public void editarLista(@RequestBody Lista l, @RequestParam String nome, @RequestParam String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void editarLista(@RequestBody Lista l, @RequestParam String nome, @RequestParam String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ContaNaoEncontradaException{
         fachadaUsuario.editarLista(l, nome, tipo);
     }
 
     @DeleteMapping("/usuario/listas")
-    public void removerLista(@RequestBody Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void removerLista(@RequestBody Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, ContaNaoEncontradaException{
         fachadaUsuario.removerLista(l);
     }
 
@@ -104,18 +105,18 @@ public class UsuarioController {
     }
     
     @PostMapping("/usuario/listas/{id}")
-    public void adicionarProdutoID(@PathVariable long id, @RequestParam String nome, @RequestParam double preco, @RequestParam int quant) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, NaoEncontradoPeloIdException {
+    public void adicionarProdutoID(@PathVariable long id, @RequestParam String nome, @RequestParam double preco, @RequestParam int quant) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, NaoEncontradoPeloIdException, ListaNaoEncontradaException {
         fachadaUsuario.adicionarProdutoID(nome, preco, quant, id);
     }
     
     @PatchMapping("/usuario/listas/{id}")
-    public void editarProduto(@RequestBody Produto p, @RequestParam String nome, @RequestParam double preco, @RequestParam int quantidade) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
-        fachadaUsuario.editarProduto(nome, preco, quantidade, p);
+    public void editarProduto(@PathVariable long id, @RequestBody Produto p, @RequestParam String nome, @RequestParam double preco, @RequestParam int quantidade) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException{
+        fachadaUsuario.editarProdutoID(nome, preco, quantidade, p, id);
     }
 
     @DeleteMapping("/usuario/listas/{id}")
-    public void removerProduto(@RequestBody Produto produto) throws ProdutoNaoEncontradoException{
-        fachadaUsuario.removerProduto(produto);
+    public void removerProduto(@PathVariable long id, @RequestBody Produto produto) throws ProdutoNaoEncontradoException, ListaNaoEncontradaException, NaoEncontradoPeloIdException{
+        fachadaUsuario.removerProdutoID(produto, id);
     }
     
 }

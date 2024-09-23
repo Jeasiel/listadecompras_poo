@@ -39,17 +39,17 @@ public class FachadaUsuario {
     private Usuario usuarioLogado;
 
     //Mexe com lista
-    public void criarLista(String nome, String tipo) throws ListaNaoEncontradaException{
+    public void criarLista(String nome, String tipo) throws ListaNaoEncontradaException, ContaNaoEncontradaException{
         boolean criado = false;
         if(!"".equals(nome) && !"".equals(tipo)){
             criado = true;
-            cadastroLista.salvarLista(new Lista(nome, tipo, usuarioLogado));
+            cadastroLista.salvarLista(new Lista(nome, tipo), usuarioLogado);
         } else if(!"".equals(nome)){
             criado = true;
-            cadastroLista.salvarLista(new Lista(nome, usuarioLogado));
+            cadastroLista.salvarLista(new Lista(nome), usuarioLogado);
         }
         if(!criado){
-            cadastroLista.salvarLista(new Lista(usuarioLogado));
+            cadastroLista.salvarLista(new Lista(), usuarioLogado);
         }
     }
 
@@ -57,7 +57,7 @@ public class FachadaUsuario {
         //Implementar
     }
 
-    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ContaNaoEncontradaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
         if(!"".equals(nome)){
             inner.setNome(nome);
@@ -65,12 +65,11 @@ public class FachadaUsuario {
         if(!"".equals(tipo)){
             inner.setTipo(tipo);
         }
-        cadastroLista.removerLista(l.getId());
-        cadastroLista.salvarLista(inner);
+        cadastroLista.salvarLista(inner, usuarioLogado);
     }
 
-	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
-        cadastroLista.removerLista(l);
+	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, ContaNaoEncontradaException{
+        cadastroLista.removerLista(l, usuarioLogado);
 	}
 	
 	public List<Lista> getListas() throws ListaNaoEncontradaException, ContaNaoEncontradaException{
@@ -78,15 +77,15 @@ public class FachadaUsuario {
 	}
     
     //Mexe com produto
-    public void adicionarProduto(String nome, double precoEstimado, int quantidade, Lista lista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
-        cadastroProduto.salvarProduto(new Produto(nome, precoEstimado, quantidade, lista));
+    public void adicionarProduto(String nome, double precoEstimado, int quantidade, Lista lista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException{
+        cadastroProduto.salvarProduto(new Produto(nome, precoEstimado, quantidade), lista);
     }
 
-    public void adicionarProdutoID(String nome, double precoEstimado, int quantidade, long idLista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, NaoEncontradoPeloIdException{
+    public void adicionarProdutoID(String nome, double precoEstimado, int quantidade, long idLista) throws ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, NaoEncontradoPeloIdException, ListaNaoEncontradaException{
         adicionarProduto(nome, precoEstimado, quantidade, cadastroLista.localizarListaId(idLista).get());
     }
 
-    public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
+    public void editarProduto(String nome, double precoEstimado, int quantidade, Produto produto, Lista lista) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException{
         Produto p = cadastroProduto.localizarProdutoId(produto.getId()).get();
         if(!"".equals(nome)){
             p.setNome(nome);
@@ -97,8 +96,11 @@ public class FachadaUsuario {
         if(quantidade != 0){
             p.setQuantidade(quantidade);
         }
-        cadastroProduto.removerProduto(p.getId());
-        cadastroProduto.salvarProduto(p);
+        cadastroProduto.salvarProduto(p, lista);
+    }
+
+    public void editarProdutoID(String nome, double precoEstimado, int quantidade, Produto produto, long id) throws NaoEncontradoPeloIdException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException, ListaNaoEncontradaException{
+        editarProduto(nome, precoEstimado, quantidade, produto, cadastroLista.localizarListaId(id).get());
     }
 
     public List<Produto> getProdutosID(long id) throws ListaNaoEncontradaException, NaoEncontradoPeloIdException{
@@ -109,8 +111,12 @@ public class FachadaUsuario {
         return cadastroProduto.procurarProdutoLista(l);
     }
 
-    public void removerProduto(Produto produto) throws ProdutoNaoEncontradoException{
-        cadastroProduto.removerProduto(produto);
+    public void removerProduto(Produto produto, Lista lista) throws ProdutoNaoEncontradoException, ListaNaoEncontradaException{
+        cadastroProduto.removerProduto(produto, lista);
+    }
+
+    public void removerProdutoID(Produto produto, long id) throws ProdutoNaoEncontradoException, ListaNaoEncontradaException, NaoEncontradoPeloIdException{
+        removerProduto(produto, cadastroLista.localizarListaId(id).get());
     }
 
     //Mexe com conta
@@ -134,7 +140,6 @@ public class FachadaUsuario {
             u.setNome(nome);
             u.setEmail(email);
             u.setSenha(senha);
-            cadastroConta.removerConta(u.getId());
             cadastroConta.salvarConta(u);
         }
     }

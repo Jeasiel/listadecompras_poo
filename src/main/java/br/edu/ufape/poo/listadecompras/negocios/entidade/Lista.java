@@ -6,9 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Lista {
@@ -23,29 +21,19 @@ public class Lista {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Produto> listaProdutos;
 
-    @OneToOne
-    @JoinColumn(name = "conta")
-    private Conta conta;
-
     public Lista(){
-    }
-
-    public Lista(Conta conta){
         nome = "Lista";
         tipo = "Indefinido";
-        this.conta = conta;
     }
 
-    public Lista(String nome, Conta conta){
+    public Lista(String nome){
         this.nome = nome;
         tipo = "Indefinido";
-        this.conta = conta;
     }
 
-    public Lista(String nome, String tipo, Conta conta){
+    public Lista(String nome, String tipo){
         this.nome = nome;
         this.tipo = tipo;
-        this.conta = conta;
     }
 
     public String getNome() {

@@ -29,6 +29,14 @@ public abstract class Conta{
 
     }
 
+    public List<Lista> getListas() {
+        return listas;
+    }
+
+    public void setListas(List<Lista> listas) {
+        this.listas = listas;
+    }
+
     public Conta(String nome, String email, String senha){
         this.nome = nome;
         this.email = email;
