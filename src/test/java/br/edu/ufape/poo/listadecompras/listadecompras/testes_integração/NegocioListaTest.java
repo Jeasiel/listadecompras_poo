@@ -12,6 +12,7 @@ import br.edu.ufape.poo.listadecompras.dados.IRepositorioListas;
 import br.edu.ufape.poo.listadecompras.negocios.NegocioConta;
 import br.edu.ufape.poo.listadecompras.negocios.NegocioLista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Conta;
+import br.edu.ufape.poo.listadecompras.negocios.entidade.Lista;
 import br.edu.ufape.poo.listadecompras.negocios.entidade.Usuario;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
@@ -48,11 +49,11 @@ public class NegocioListaTest {
 
     @Test
     void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException, ProdutoNaoEncontradoException{
-
-        fachada.login("clauderson@gmail.com", "aFline");
-        fachada.criarLista("funfa", "jae");
+        
+        Lista l = new Lista("funfa", "jae");
+        repositorioListas.save(l);
         long qtdLista = repositorioListas.count();
-        fachada.removerLista(fachada.getListas().get(0));
+        repositorioListas.delete(l);
         long qtdLista2 = repositorioListas.count();
         assertEquals(qtdLista - 1, qtdLista2);
 
@@ -79,6 +80,8 @@ public class NegocioListaTest {
         negocioLista.setRepositorioListas(repositorioListas);
         negocioLista.setRepositorioContas(repositorioContas);
         fachada.setCadastroLista(negocioLista);
+        fachada.login("clauderson@gmail.com", "aFline");
+        
         
 
         
