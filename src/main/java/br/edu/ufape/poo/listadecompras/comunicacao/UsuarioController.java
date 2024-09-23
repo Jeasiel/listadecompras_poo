@@ -35,6 +35,7 @@ import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
 @RestController
 @RequestMapping("/api/v1")
 public class UsuarioController {
+    
     @Autowired
     public FachadaUsuario fachadaUsuario;
 
@@ -87,12 +88,12 @@ public class UsuarioController {
     }
     
     @PatchMapping("/usuario/listas")
-    public void editarLista(@RequestBody Lista l, @RequestParam String nome, @RequestParam String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void editarLista(@RequestBody Lista l, @RequestParam String nome, @RequestParam String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         fachadaUsuario.editarLista(l, nome, tipo);
     }
 
     @DeleteMapping("/usuario/listas")
-    public void removerLista(@RequestBody Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void removerLista(@RequestBody Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException{
         fachadaUsuario.removerLista(l);
     }
 

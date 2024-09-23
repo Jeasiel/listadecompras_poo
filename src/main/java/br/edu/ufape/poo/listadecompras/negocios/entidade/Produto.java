@@ -6,11 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class Produto {
 
     @Id
+    @SequenceGenerator(name = "seqGenP", sequenceName = "id_produto", initialValue = 1, allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;

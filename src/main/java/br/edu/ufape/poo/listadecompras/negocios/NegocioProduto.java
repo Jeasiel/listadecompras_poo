@@ -52,10 +52,7 @@ public class NegocioProduto implements InterfaceCadastroProduto{
         if(entity.getPrecoEstimado() <= 0){
             throw new ValorInvalidoException();
         }
-
-        if(repositorioProduto.findById(entity.getId()) == null){
-            throw new ProdutoNaoEncontradoException(entity);
-        }
+        
         repositorioProduto.save(entity);
     }
 

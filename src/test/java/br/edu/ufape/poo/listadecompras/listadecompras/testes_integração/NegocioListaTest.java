@@ -17,6 +17,7 @@ import br.edu.ufape.poo.listadecompras.negocios.excecoes.ContaNaoEncontradaExcep
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.ListaNaoEncontradaException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloEmailException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.NaoEncontradoPeloIdException;
+import br.edu.ufape.poo.listadecompras.negocios.excecoes.ProdutoNaoEncontradoException;
 import br.edu.ufape.poo.listadecompras.negocios.excecoes.SenhaErradaException;
 import br.edu.ufape.poo.listadecompras.negocios.fachada.FachadaUsuario;
 
@@ -44,7 +45,7 @@ public class NegocioListaTest {
     } 
 
     @Test
-    void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException{
+    void removerListaTeste() throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ContaNaoEncontradaException, NaoEncontradoPeloEmailException, SenhaErradaException, ProdutoNaoEncontradoException{
 
         long qtdLista = repositorioListas.count();
         fachada.removerLista(fachada.getListas().get(0));

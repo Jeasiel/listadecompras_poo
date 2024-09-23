@@ -57,7 +57,7 @@ public class FachadaUsuario {
         //Implementar
     }
 
-    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+    public void editarLista(Lista l, String nome, String tipo) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
         Lista inner = cadastroLista.localizarListaId(l.getId()).get();
         if(!"".equals(nome)){
             inner.setNome(nome);
@@ -65,11 +65,16 @@ public class FachadaUsuario {
         if(!"".equals(tipo)){
             inner.setTipo(tipo);
         }
-        cadastroLista.removerLista(l.getId());
+        for(int i = 0; i < cadastroProduto.procurarProdutoLista(inner).size(); i++){
+            editarProduto(cadastroProduto.procurarProdutoLista(inner).get(i), inner);
+        }
         cadastroLista.salvarLista(inner);
     }
 
-	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException{
+	public void removerLista(Lista l) throws NaoEncontradoPeloIdException, ListaNaoEncontradaException, ProdutoNaoEncontradoException{
+        for(int i = 0; i < cadastroProduto.procurarProdutoLista(l).size(); i++){
+            cadastroProduto.removerProduto(cadastroProduto.procurarProdutoLista(l).get(i));
+        }
         cadastroLista.removerLista(l);
 	}
 	
@@ -97,7 +102,12 @@ public class FachadaUsuario {
         if(quantidade != 0){
             p.setQuantidade(quantidade);
         }
-        cadastroProduto.removerProduto(p.getId());
+        cadastroProduto.salvarProduto(p);
+    }
+
+    public void editarProduto(Produto p, Lista lista) throws ProdutoNaoEncontradoException, NaoEncontradoPeloIdException, NomeInvalidoException, ValorInvalidoException, QuantidadeInvalidaException{
+        cadastroProduto.removerProduto(cadastroProduto.localizarProdutoId(p.getId()).get());
+        p.setLista(lista);
         cadastroProduto.salvarProduto(p);
     }
 
@@ -134,7 +144,6 @@ public class FachadaUsuario {
             u.setNome(nome);
             u.setEmail(email);
             u.setSenha(senha);
-            cadastroConta.removerConta(u.getId());
             cadastroConta.salvarConta(u);
         }
     }
